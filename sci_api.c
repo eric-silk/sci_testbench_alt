@@ -4,9 +4,9 @@
  *  Created on: Apr 12, 2016
  *      Author: Eric
  */
-#include "spi_api.h"
+#include "sci_api.h"
 
-int parse_cmd(cmd, val){
+int parse_cmd(Uint16 cmd, Uint16 val){
 	int rslt = 0;
 	switch(cmd){
 
@@ -85,6 +85,7 @@ int parse_cmd(cmd, val){
 		break;
 
 	} //end switch case
+	return 1;
 } // end parse_cmd()
 
 int e_stop(){
@@ -92,7 +93,7 @@ int e_stop(){
 	return 1; //sucess
 }
 
-int send_value(cmd, val){
+int send_value(Uint16 cmd, Uint16 val){
 	//code to transmit cmd-val pair
 	return 1; //if success
 }
@@ -128,7 +129,7 @@ int set_u_disp_x(int disp){
 	return 1; //sucess
 }
 
-int set_l_disp_y(int disp){
+int set_u_disp_y(int disp){
 	// code to set lower y displacement
 	return 1; //sucess
 }
@@ -165,7 +166,7 @@ int get_l_disp_x(){
 int get_l_disp_y(){
 	Uint16 l_disp_y = 0;
 	//code to obtain lower y displacement
-	send_value(SEND_L_DISP_Y, l_disp_Y);
+	send_value(SEND_L_DISP_Y, l_disp_y);
 	return 1; //sucess
 }
 
@@ -176,7 +177,7 @@ int get_u_disp_x(){
 	return 1; //sucess
 }
 
-int get_l_disp_y(){
+int get_u_disp_y(){
 	Uint16 u_disp_y = 0;
 	//code to obtain upper y displacement
 	send_value(SEND_U_DISP_Y, u_disp_y);
@@ -213,9 +214,11 @@ int broadcast(){
 }
 int broadcast_ctrl(int enable){
 	// code to set an enable value
+	return 1;
 }
 
 // Functions for error sending
 int send_error(Uint16 error){
 	//code to xmit an error code
+	return 1;
 }

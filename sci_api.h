@@ -5,6 +5,9 @@
  *      Author: Eric
  */
 
+
+#include "F28x_Project.h"
+
 #ifndef SCI_API_H_
 #define SCI_API_H_
 
@@ -22,9 +25,9 @@
 #define GET_JERK			0x1002 // send current jerk
 
 // Displacements
-#define GET_U_DSIP_X		0x1003 // send current upper x displacement
+#define GET_U_DISP_X		0x1003 // send current upper x displacement
 #define GET_U_DISP_Y		0x1004 // send current upper y displacement
-#define GET_L_DSIP_X		0x1005 // send current lower x displacement
+#define GET_L_DISP_X		0x1005 // send current lower x displacement
 #define GET_L_DISP_Y		0x1006 // send current lower y displacement
 
 /******* SET commands ********/
@@ -69,10 +72,10 @@
 
 /************************************ FUNCTIONS ***********************************/
 
-int parse_cmd(cmd, val);
+int parse_cmd(Uint16 cmd, Uint16 val);
 int e_stop();
 
-int send_value(cmd, val);
+int send_value(Uint16 cmd, Uint16 val);
 
 // Function prototypes to set values
 int set_vel(Uint16 vel);
@@ -82,7 +85,7 @@ int set_jerk(Uint16 jerk);
 int set_l_disp_x(int disp);
 int set_l_disp_y(int disp);
 int set_u_disp_x(int disp);
-int set_l_disp_y(int disp);
+int set_u_disp_y(int disp);
 
 // Function prototypes to get values
 int get_vel();
@@ -92,7 +95,7 @@ int get_jerk();
 int get_l_disp_x();
 int get_l_disp_y();
 int get_u_disp_x();
-int get_l_disp_y();
+int get_u_disp_y();
 
 // Function prototypes for broadcast handling
 int broadcast();
