@@ -20,8 +20,17 @@ void scia_fifo_init()
    SciaRegs.SCICTL1.bit.RXERRINTENA = 1; // Enable RX interrupts
    SciaRegs.SCICTL2.bit.TXINTENA =1; //SCITXBUF interrupt enable
    SciaRegs.SCICTL2.bit.RXBKINTENA =1; //Receiver-buffer/break interrupt enable
-   SciaRegs.SCIHBAUD.all = 0x0002;
-   SciaRegs.SCILBAUD.all = 0x008B;
+   /*
+    * Baud rate is determined as follows:
+    * BRR = (SCIHBAUD << 8) && SCILBAUD
+    * Baud = LSPCLK / ((BRR+1)*8)
+    * LSPCLK should be 50MHz by default (200MHz/4)
+    * If BRR == 0, then Baud = LSPCLK/16 (or 3,125,000 by default)
+    */
+   //SciaRegs.SCIHBAUD.all = 0x0002;
+   //SciaRegs.SCILBAUD.all = 0x008B;
+   SciaRegs.SCIHBAUD.all = 0x0000;
+   SciaRegs.SCILBAUD.all = 0x0000;
    SciaRegs.SCICCR.bit.LOOPBKENA = 0; // disable loop back
    SciaRegs.SCIFFTX.all=0xC022; //enable+rst fifo, sets TX FIFO interrupt level to 2, enables TX interrupt
    SciaRegs.SCIFFRX.all=0x0021; //set RX FIFO interrupt level to 1, enables RX interrupt

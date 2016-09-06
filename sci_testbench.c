@@ -1,19 +1,16 @@
-//###########################################################################
-// File: sci_testbench.c
-// Author: Eric Silk (silk2390@vandals.uidaho.edu)
-// Revision date: April 4th, 2016
-// MCU: TI Delfino TMS320F28377D
-//
-// Developed for the FlyCAM project in conjunction with the FESS team at
-// the University of Idaho.
-//
-// Used as a testbench for serial communication with a GUI running on a
-// seperate PC. Will ultimately support an API to parse commands from the
-// serial port and adjust operating parameters of the FESS control system, as
-// well as providing consistent updates on system performance (e.g. speed,
-// acceleration, stored energy).
-//
-//###########################################################################
+/*****************************************************************************
+ * File: sci_testbench.c
+ * Author: Eric Silk (silk2390@vandals.uidaho.edu)
+ * Revision date: April 4th, 2016
+ * MCU: TI Delfino TMS320F28377D
+ * Developed for the FlyCAM project in conjunction with the FESS team at
+ * the University of Idaho.
+ * Used as a testbench for serial communication with a GUI running on a
+ * seperate PC. Will ultimately support an API to parse commands from the
+ * serial port and adjust operating parameters of the FESS control system, as
+ * well as providing consistent updates on system performance (e.g. speed,
+ * acceleration, stored energy).
+ *****************************************************************************/
 
 #include "F28x_Project.h"     // Device Headerfile and Examples Include File
 #include "77D_sci.h"		  // Device specific SCI functions
