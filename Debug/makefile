@@ -4,14 +4,15 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := F:/ti/ccsv6/tools/compiler/ti-cgt-c2000_6.4.9
+CG_TOOL_ROOT := E:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./77D_sci.obj" \
+"./sci_api.obj" \
 "./sci_testbench.obj" \
-"./F2837xD_headers/source/F2837xD_GlobalVariableDefs.obj" \
 "./F2837xD_common/source/F2837xD_CodeStartBranch.obj" \
 "./F2837xD_common/source/F2837xD_CpuTimers.obj" \
 "./F2837xD_common/source/F2837xD_DefaultISR.obj" \
@@ -19,14 +20,13 @@ ORDERED_OBJS += \
 "./F2837xD_common/source/F2837xD_Ipc.obj" \
 "./F2837xD_common/source/F2837xD_PieCtrl.obj" \
 "./F2837xD_common/source/F2837xD_PieVect.obj" \
-"./F2837xD_common/source/F2837xD_Sci.obj" \
 "./F2837xD_common/source/F2837xD_SysCtrl.obj" \
-"./F2837xD_common/source/F2837xD_sci_io.obj" \
 "./F2837xD_common/source/F2837xD_usDelay.obj" \
+"./F2837xD_headers/source/F2837xD_GlobalVariableDefs.obj" \
 "../2837x_FLASH_lnk_cpu1.cmd" \
 "../F2837xD_headers/cmd/F2837xD_Headers_nonBIOS_cpu1.cmd" \
 $(GEN_CMDS__FLAG) \
--l"rts2800_fpu32.lib" \
+-lrts2800_fpu32.lib \
 
 -include ../makefile.init
 
@@ -36,13 +36,13 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include F2837xD_headers/source/subdir_vars.mk
--include F2837xD_headers/cmd/subdir_vars.mk
 -include F2837xD_common/source/subdir_vars.mk
+-include F2837xD_headers/cmd/subdir_vars.mk
+-include F2837xD_headers/source/subdir_vars.mk
 -include subdir_rules.mk
--include F2837xD_headers/source/subdir_rules.mk
--include F2837xD_headers/cmd/subdir_rules.mk
 -include F2837xD_common/source/subdir_rules.mk
+-include F2837xD_headers/cmd/subdir_rules.mk
+-include F2837xD_headers/source/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -63,6 +63,9 @@ ifneq ($(strip $(ASM_DEPS)),)
 endif
 ifneq ($(strip $(CC_DEPS)),)
 -include $(CC_DEPS)
+endif
+ifneq ($(strip $(SV7A_DEPS)),)
+-include $(SV7A_DEPS)
 endif
 ifneq ($(strip $(S55_DEPS)),)
 -include $(S55_DEPS)
@@ -155,22 +158,22 @@ all: sci_testbench_alt.out
 sci_testbench_alt.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C2000 Linker'
-	"F:/ti/ccsv6/tools/compiler/ti-cgt-c2000_6.4.9/bin/cl2000" -v28 -mt -ml --vcu_support=vcu2 --cla_support=cla1 --tmu_support=tmu0 --float_support=fpu32 -g --define=CPU1 --diag_warning=225 --diag_wrap=off --display_error_number -z -m"sci_testbench_alt.map" --stack_size=0x200 --warn_sections -i"F:/ti/ccsv6/tools/compiler/ti-cgt-c2000_6.4.9/lib" -i"F:/ti/workspace2/sci_testbench_alt/F2837xD_common" -i"F:/ti/workspace2/sci_testbench_alt/F2837xD_headers" -i"F:/ti/workspace2/sci_testbench_alt/F2837xD_headers/include" -i"F:/ti/ccsv6/tools/compiler/ti-cgt-c2000_6.4.9/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="sci_testbench_alt_linkInfo.xml" --rom_model -o "sci_testbench_alt.out" $(ORDERED_OBJS)
+	"E:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --tmu_support=tmu0 --cla_support=cla1 --vcu_support=vcu2 -g --define=CPU1 --diag_warning=225 --display_error_number --diag_wrap=off -z -m"sci_testbench_alt.map" --stack_size=0x200 --warn_sections -i"E:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/lib" -i"E:/Users/Eric/Documents/Senior Design/sci_testbench_alt/F2837xD_common" -i"E:/Users/Eric/Documents/Senior Design/sci_testbench_alt/F2837xD_headers" -i"E:/Users/Eric/Documents/Senior Design/sci_testbench_alt/F2837xD_headers/include" -i"E:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/include" --reread_libs --display_error_number --diag_wrap=off --xml_link_info="sci_testbench_alt_linkInfo.xml" --rom_model -o "sci_testbench_alt.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 sci_testbench_alt.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C2000 Hex Utility'
-	"F:/ti/ccsv6/tools/compiler/ti-cgt-c2000_6.4.9/bin/hex2000"  -o "sci_testbench_alt.hex" $(EXE_OUTPUTS__QUOTED)
+	"E:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/bin/hex2000"  -o "sci_testbench_alt.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "sci_testbench.pp" "F2837xD_headers\source\F2837xD_GlobalVariableDefs.pp" "F2837xD_common\source\F2837xD_CpuTimers.pp" "F2837xD_common\source\F2837xD_DefaultISR.pp" "F2837xD_common\source\F2837xD_Gpio.pp" "F2837xD_common\source\F2837xD_Ipc.pp" "F2837xD_common\source\F2837xD_PieCtrl.pp" "F2837xD_common\source\F2837xD_PieVect.pp" "F2837xD_common\source\F2837xD_Sci.pp" "F2837xD_common\source\F2837xD_SysCtrl.pp" "F2837xD_common\source\F2837xD_sci_io.pp" 
-	-$(RM) "sci_testbench.obj" "F2837xD_headers\source\F2837xD_GlobalVariableDefs.obj" "F2837xD_common\source\F2837xD_CodeStartBranch.obj" "F2837xD_common\source\F2837xD_CpuTimers.obj" "F2837xD_common\source\F2837xD_DefaultISR.obj" "F2837xD_common\source\F2837xD_Gpio.obj" "F2837xD_common\source\F2837xD_Ipc.obj" "F2837xD_common\source\F2837xD_PieCtrl.obj" "F2837xD_common\source\F2837xD_PieVect.obj" "F2837xD_common\source\F2837xD_Sci.obj" "F2837xD_common\source\F2837xD_SysCtrl.obj" "F2837xD_common\source\F2837xD_sci_io.obj" "F2837xD_common\source\F2837xD_usDelay.obj" 
-	-$(RM) "F2837xD_common\source\F2837xD_CodeStartBranch.pp" "F2837xD_common\source\F2837xD_usDelay.pp" 
+	-$(RM) "77D_sci.d" "sci_api.d" "sci_testbench.d" "F2837xD_common\source\F2837xD_CpuTimers.d" "F2837xD_common\source\F2837xD_DefaultISR.d" "F2837xD_common\source\F2837xD_Gpio.d" "F2837xD_common\source\F2837xD_Ipc.d" "F2837xD_common\source\F2837xD_PieCtrl.d" "F2837xD_common\source\F2837xD_PieVect.d" "F2837xD_common\source\F2837xD_SysCtrl.d" "F2837xD_headers\source\F2837xD_GlobalVariableDefs.d" 
+	-$(RM) "77D_sci.obj" "sci_api.obj" "sci_testbench.obj" "F2837xD_common\source\F2837xD_CodeStartBranch.obj" "F2837xD_common\source\F2837xD_CpuTimers.obj" "F2837xD_common\source\F2837xD_DefaultISR.obj" "F2837xD_common\source\F2837xD_Gpio.obj" "F2837xD_common\source\F2837xD_Ipc.obj" "F2837xD_common\source\F2837xD_PieCtrl.obj" "F2837xD_common\source\F2837xD_PieVect.obj" "F2837xD_common\source\F2837xD_SysCtrl.obj" "F2837xD_common\source\F2837xD_usDelay.obj" "F2837xD_headers\source\F2837xD_GlobalVariableDefs.obj" 
+	-$(RM) "F2837xD_common\source\F2837xD_CodeStartBranch.d" "F2837xD_common\source\F2837xD_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

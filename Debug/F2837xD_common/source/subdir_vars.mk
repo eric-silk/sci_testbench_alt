@@ -14,9 +14,7 @@ C_SRCS += \
 ../F2837xD_common/source/F2837xD_Ipc.c \
 ../F2837xD_common/source/F2837xD_PieCtrl.c \
 ../F2837xD_common/source/F2837xD_PieVect.c \
-../F2837xD_common/source/F2837xD_Sci.c \
-../F2837xD_common/source/F2837xD_SysCtrl.c \
-../F2837xD_common/source/F2837xD_sci_io.c 
+../F2837xD_common/source/F2837xD_SysCtrl.c 
 
 OBJS += \
 ./F2837xD_common/source/F2837xD_CodeStartBranch.obj \
@@ -26,36 +24,30 @@ OBJS += \
 ./F2837xD_common/source/F2837xD_Ipc.obj \
 ./F2837xD_common/source/F2837xD_PieCtrl.obj \
 ./F2837xD_common/source/F2837xD_PieVect.obj \
-./F2837xD_common/source/F2837xD_Sci.obj \
 ./F2837xD_common/source/F2837xD_SysCtrl.obj \
-./F2837xD_common/source/F2837xD_sci_io.obj \
 ./F2837xD_common/source/F2837xD_usDelay.obj 
 
 ASM_DEPS += \
-./F2837xD_common/source/F2837xD_CodeStartBranch.pp \
-./F2837xD_common/source/F2837xD_usDelay.pp 
+./F2837xD_common/source/F2837xD_CodeStartBranch.d \
+./F2837xD_common/source/F2837xD_usDelay.d 
 
 C_DEPS += \
-./F2837xD_common/source/F2837xD_CpuTimers.pp \
-./F2837xD_common/source/F2837xD_DefaultISR.pp \
-./F2837xD_common/source/F2837xD_Gpio.pp \
-./F2837xD_common/source/F2837xD_Ipc.pp \
-./F2837xD_common/source/F2837xD_PieCtrl.pp \
-./F2837xD_common/source/F2837xD_PieVect.pp \
-./F2837xD_common/source/F2837xD_Sci.pp \
-./F2837xD_common/source/F2837xD_SysCtrl.pp \
-./F2837xD_common/source/F2837xD_sci_io.pp 
+./F2837xD_common/source/F2837xD_CpuTimers.d \
+./F2837xD_common/source/F2837xD_DefaultISR.d \
+./F2837xD_common/source/F2837xD_Gpio.d \
+./F2837xD_common/source/F2837xD_Ipc.d \
+./F2837xD_common/source/F2837xD_PieCtrl.d \
+./F2837xD_common/source/F2837xD_PieVect.d \
+./F2837xD_common/source/F2837xD_SysCtrl.d 
 
 C_DEPS__QUOTED += \
-"F2837xD_common\source\F2837xD_CpuTimers.pp" \
-"F2837xD_common\source\F2837xD_DefaultISR.pp" \
-"F2837xD_common\source\F2837xD_Gpio.pp" \
-"F2837xD_common\source\F2837xD_Ipc.pp" \
-"F2837xD_common\source\F2837xD_PieCtrl.pp" \
-"F2837xD_common\source\F2837xD_PieVect.pp" \
-"F2837xD_common\source\F2837xD_Sci.pp" \
-"F2837xD_common\source\F2837xD_SysCtrl.pp" \
-"F2837xD_common\source\F2837xD_sci_io.pp" 
+"F2837xD_common\source\F2837xD_CpuTimers.d" \
+"F2837xD_common\source\F2837xD_DefaultISR.d" \
+"F2837xD_common\source\F2837xD_Gpio.d" \
+"F2837xD_common\source\F2837xD_Ipc.d" \
+"F2837xD_common\source\F2837xD_PieCtrl.d" \
+"F2837xD_common\source\F2837xD_PieVect.d" \
+"F2837xD_common\source\F2837xD_SysCtrl.d" 
 
 OBJS__QUOTED += \
 "F2837xD_common\source\F2837xD_CodeStartBranch.obj" \
@@ -65,14 +57,12 @@ OBJS__QUOTED += \
 "F2837xD_common\source\F2837xD_Ipc.obj" \
 "F2837xD_common\source\F2837xD_PieCtrl.obj" \
 "F2837xD_common\source\F2837xD_PieVect.obj" \
-"F2837xD_common\source\F2837xD_Sci.obj" \
 "F2837xD_common\source\F2837xD_SysCtrl.obj" \
-"F2837xD_common\source\F2837xD_sci_io.obj" \
 "F2837xD_common\source\F2837xD_usDelay.obj" 
 
 ASM_DEPS__QUOTED += \
-"F2837xD_common\source\F2837xD_CodeStartBranch.pp" \
-"F2837xD_common\source\F2837xD_usDelay.pp" 
+"F2837xD_common\source\F2837xD_CodeStartBranch.d" \
+"F2837xD_common\source\F2837xD_usDelay.d" 
 
 ASM_SRCS__QUOTED += \
 "../F2837xD_common/source/F2837xD_CodeStartBranch.asm" \
@@ -85,8 +75,6 @@ C_SRCS__QUOTED += \
 "../F2837xD_common/source/F2837xD_Ipc.c" \
 "../F2837xD_common/source/F2837xD_PieCtrl.c" \
 "../F2837xD_common/source/F2837xD_PieVect.c" \
-"../F2837xD_common/source/F2837xD_Sci.c" \
-"../F2837xD_common/source/F2837xD_SysCtrl.c" \
-"../F2837xD_common/source/F2837xD_sci_io.c" 
+"../F2837xD_common/source/F2837xD_SysCtrl.c" 
 
 

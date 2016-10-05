@@ -11,7 +11,38 @@
 #ifndef SCI_API_H_
 #define SCI_API_H_
 
+// structure to hold operating params, use for setpoints and current values
+extern struct params {
+	float vel;
+	float accel;
+	float jerk;
+	float l_disp_x;
+	float l_disp_y;
+	float u_disp_x;
+	float u_disp_y;
+};
+
+/*  E-STOP LIMITS
+ * 	Sets the safe decel/jerk values for an emergency stop
+ */
+#define SAFE_DECEL 10; //dummy values, adjust later
+#define SAFE_JERK  1;
+
+// Function prototype to init op and setpoint param structs -- sets all elements to 0
+extern void init_params( struct params *values);
+
+// Bulk packets will always be sent in the order of the definiton of the macros
+// E.g. |SEND_BULK|VEL|ACCEL|JERK|L_DISP_X|L_DISP_Y|U_DISP_X|U_DISP_Y|
+
 /********************************* COMMAND MACROS *********************************/
+
+/* NOTE!
+ * Current API assumes NNN == 001
+ * This current instance does NOT support multiple values being sent
+ * e.g.: cmd = 0xF9 (SEND_VEL with NNN = 0b111) will not happen
+ * 		 cmd = 0x59 (SEND_VEL with NNN = 0b001) can happen
+ * Future users can implement this functionality if desired.
+ */
 
 #define EMERGENCY 			0xFFFF // emergency stop
 
@@ -20,82 +51,59 @@
 /******* GET commands ********/
 // Poll the MCU for the values. Not a part of regular broadcasts
 // Velocity, acceleration, jerk
-#define GET_VELOCITY		0x1000 // send current velocity
-#define GET_ACCEL			0x1001 // send current acceleration
-#define GET_JERK			0x1002 // send current jerk
+#define GET_VEL				0x01 // send current velocity
+#define GET_ACCEL			0x02 // send current acceleration
+#define GET_JERK			0x03 // send current jerk
 
 // Displacements
-#define GET_U_DISP_X		0x1003 // send current upper x displacement
-#define GET_U_DISP_Y		0x1004 // send current upper y displacement
-#define GET_L_DISP_X		0x1005 // send current lower x displacement
-#define GET_L_DISP_Y		0x1006 // send current lower y displacement
+#define GET_L_DISP			0x04 // send current upper x & y displacement
+#define GET_U_DISP			0x05 // send current lower x & y displacement
+#define GET_ALL				0xE6 // send all values
 
 /******* SET commands ********/
 // Velocity, acceleration, jerk
-#define SET_VELOCITY 		0x2000 // Define velocity setpoint
-#define SET_ACCEL 			0x2001 // Define acceleration
-#define SET_JERK			0x2002 // Define max change in acceleration
+#define SET_VEL				0x59 // Define velocity setpoint
+#define SET_ACCEL 			0x2A // Define acceleration
+#define SET_JERK			0x2B // Define max change in acceleration
+#define SET_VEL_ACCEL		0x2C
+#define SET_VEL_JERK		0x2D
+#define SET_ACCEL_JERK		0x2E
+#define SET_BULK			0x6F // Set all values
 
-// Displacements
-#define SET_L_DISP_X		0x2003 // Set desired lower X displacement
-#define SET_L_DISP_Y		0x2004 // Set desired lower Y displacement
-#define SET_U_DISP_X		0x2005 // Set desired upper X displacement
-#define SET_U_DISP_Y		0x2006 // Set desired upper Y displacement
-
-// Broadcasting controls
-#define EN_BROADCASTS		0x20A0 //enable regular broadcasts
-#define DIS_BROADCASTS		0x20A1 //disable regular broadcasts
-
-/******* Send commands ********/
-// These are sent in tandem with the associated values during broadcast rather than
-// in response to a "get" command.
-
+/******* SEND commands ********/
 // Velocity, acceleration, jerk
-#define SEND_VELOCITY		0x3000 // broadcast Velocity
-#define SEND_ACCEL			0x3001 // broadcast Acceleration
-#define SEND_JERK			0x3002 // broadcast Jerk
-
-// Displacements
-#define SEND_L_DISP_X		0x3003 // broadcast lower X displacement
-#define SEND_L_DISP_Y		0x3004 // broadcast lower Y displacement
-#define SEND_U_DISP_X		0x3005 // broadcast upper X displacement
-#define SEND_U_DISP_Y		0x3006 // broadcast upper Y displacement
+#define SEND_VEL			0x59 // Send current velocity
+#define SEND_ACCEL 			0x5A // Send current acceleration
+#define SEND_JERK			0x5B // Send curent change in acceleration
+#define SEND_L_DISP			0x5C // Send current lower displacement
+#define SEND_U_DISP			0x5D // Send current upper displacement
+#define SEND_BULK			0xFE // Set all values
 
 /************ ERRORS ***********/
-#define ERROR_SEND			0x4000 // unable to send
-#define ERROR_RCV			0x4001 // unable to rcv
-#define ERROR_DIS			0x4002 // unable to disable broadcasts
-#define ERROR_EN			0x4003 // unable to enable broadcasts
-#define ERROR_FIFO_FULL		0x4004 // FIFO FULL
-#define ERROR_INVALID_CMD	0x4005 // unable to parse CMD sent
+#define ERROR_FIFO_FULL		0x15 // FIFO FULL
+#define EMERGENCY			0x17 // Emergency condition
 
 
 /************************************ FUNCTIONS ***********************************/
 
-int parse_cmd(Uint16 cmd, Uint16 val);
+int extract_cmd(char *cmd, int *index, char *extracted);
+int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point);
 int e_stop();
 
-int send_value(Uint16 cmd, Uint16 val);
+int send_value(char cmd, float val);
 
 // Function prototypes to set values
 int set_vel(Uint16 vel);
 int set_accel(Uint16 accel);
 int set_jerk(Uint16 jerk);
 
-int set_l_disp_x(int disp);
-int set_l_disp_y(int disp);
-int set_u_disp_x(int disp);
-int set_u_disp_y(int disp);
-
 // Function prototypes to get values
 int get_vel();
 int get_accel();
 int get_jerk();
 
-int get_l_disp_x();
-int get_l_disp_y();
-int get_u_disp_x();
-int get_u_disp_y();
+int get_l_disp(float x_disp, float y_disp);
+int get_u_disp(float x_disp, float y_disp);
 
 // Function prototypes for broadcast handling
 int broadcast();

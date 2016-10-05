@@ -10,10 +10,10 @@ OBJS += \
 ./F2837xD_headers/source/F2837xD_GlobalVariableDefs.obj 
 
 C_DEPS += \
-./F2837xD_headers/source/F2837xD_GlobalVariableDefs.pp 
+./F2837xD_headers/source/F2837xD_GlobalVariableDefs.d 
 
 C_DEPS__QUOTED += \
-"F2837xD_headers\source\F2837xD_GlobalVariableDefs.pp" 
+"F2837xD_headers\source\F2837xD_GlobalVariableDefs.d" 
 
 OBJS__QUOTED += \
 "F2837xD_headers\source\F2837xD_GlobalVariableDefs.obj" 

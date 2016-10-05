@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -l"rts2800_fpu32.lib"
+LIBS := -lrts2800_fpu32.lib
 

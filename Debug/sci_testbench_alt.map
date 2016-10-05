@@ -1,10 +1,10 @@
 ******************************************************************************
-             TMS320C2000 Linker PC v6.4.9                      
+             TMS320C2000 Linker PC v15.12.1                    
 ******************************************************************************
->> Linked Wed Apr 06 21:17:41 2016
+>> Linked Wed Sep 14 20:57:54 2016
 
 OUTPUT FILE NAME:   <sci_testbench_alt.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 00082c88
+ENTRY POINT SYMBOL: "_c_int00"  address: 00082d97
 
 
 MEMORY CONFIGURATION
@@ -23,11 +23,11 @@ PAGE 0:
   RAMGS15               0001b000   00001000  00000000  00001000  RWIX
   BEGIN                 00080000   00000002  00000002  00000000  RWIX
   FLASHA                00080002   00001ffe  00000000  00001ffe  RWIX
-  FLASHB                00082000   00002000  00000d77  00001289  RWIX
+  FLASHB                00082000   00002000  00000f48  000010b8  RWIX
   FLASHC                00084000   00002000  00000000  00002000  RWIX
   FLASHD                00086000   00002000  00000004  00001ffc  RWIX
   FLASHE                00088000   00008000  00000000  00008000  RWIX
-  FLASHF                00090000   00008000  000001d0  00007e30  RWIX
+  FLASHF                00090000   00008000  000001c0  00007e40  RWIX
   FLASHG                00098000   00008000  00000000  00008000  RWIX
   FLASHH                000a0000   00008000  00000000  00008000  RWIX
   FLASHI                000a8000   00008000  00000000  00008000  RWIX
@@ -115,7 +115,7 @@ PAGE 1:
   OUTPUT_XBAR           00007a80   00000040  00000040  00000000  RWIX
   GPIOCTRL              00007c00   00000180  00000180  00000000  RWIX
   GPIODAT               00007f00   00000030  00000030  00000000  RWIX
-  RAMLS5                0000a800   00000800  00000025  000007db  RWIX
+  RAMLS5                0000a800   00000800  00000036  000007ca  RWIX
   RAMD1                 0000b800   00000800  00000000  00000800  RWIX
   RAMGS0                0000c000   00001000  00000000  00001000  RWIX
   RAMGS1                0000d000   00001000  00000000  00001000  RWIX
@@ -167,11 +167,10 @@ codestart
                   00080000    00000002     F2837xD_CodeStartBranch.obj (codestart)
 
 .cinit     0    00082000    00000026     
-                  00082000    0000000c     sci_testbench.obj (.cinit)
-                  0008200c    0000000a     rts2800_fpu32.lib : exit.obj (.cinit)
-                  00082016    00000005                       : _lock.obj (.cinit:__lock)
-                  0008201b    00000005                       : _lock.obj (.cinit:__unlock)
-                  00082020    00000004     F2837xD_sci_io.obj (.cinit)
+                  00082000    0000000e     rts2800_fpu32.lib : exit.obj (.cinit)
+                  0008200e    0000000c     sci_testbench.obj (.cinit)
+                  0008201a    00000005     rts2800_fpu32.lib : _lock.obj (.cinit:__lock)
+                  0008201f    00000005                       : _lock.obj (.cinit:__unlock)
                   00082024    00000002     --HOLE-- [fill = 0]
 
 .pinit     0    00082000    00000000     UNINITIALIZED
@@ -194,25 +193,30 @@ GETWRITEIDX
 PUTREADIDX 
 *          0    0003f800    00000000     DSECT
 
-.text      0    00082028    00000d51     
+.text      0    00082028    00000f22     
                   00082028    00000585     F2837xD_DefaultISR.obj (.text:retain)
                   000825ad    000002cd     F2837xD_SysCtrl.obj (.text)
-                  0008287a    0000024a     F2837xD_Gpio.obj (.text)
-                  00082ac4    000000b3     sci_testbench.obj (.text:retain)
-                  00082b77    00000095     sci_testbench.obj (.text)
-                  00082c0c    0000007c     F2837xD_CpuTimers.obj (.text)
-                  00082c88    00000046     rts2800_fpu32.lib : boot.obj (.text)
-                  00082cce    00000028     F2837xD_PieCtrl.obj (.text)
-                  00082cf6    00000028     F2837xD_PieVect.obj (.text)
-                  00082d1e    00000019     rts2800_fpu32.lib : args_main.obj (.text)
-                  00082d37    00000019                       : exit.obj (.text)
-                  00082d50    00000018                       : ll_aox.obj (.text)
-                  00082d68    00000009                       : _lock.obj (.text)
-                  00082d71    00000008     F2837xD_CodeStartBranch.obj (.text)
+                  0008287a    00000244     F2837xD_Gpio.obj (.text)
+                  00082abe    00000164     sci_api.obj (.text)
+                  00082c22    0000007e     sci_testbench.obj (.text:retain)
+                  00082ca0    0000007c     F2837xD_CpuTimers.obj (.text)
+                  00082d1c    0000007b     sci_testbench.obj (.text)
+                  00082d97    00000056     rts2800_fpu32.lib : boot.obj (.text)
+                  00082ded    00000046                       : cpy_tbl.obj (.text)
+                  00082e33    00000041     77D_sci.obj (.text)
+                  00082e74    00000029     rts2800_fpu32.lib : exit.obj (.text)
+                  00082e9d    00000028     F2837xD_PieCtrl.obj (.text)
+                  00082ec5    00000026     F2837xD_PieVect.obj (.text)
+                  00082eeb    0000001a     rts2800_fpu32.lib : cpy_utils.obj (.text)
+                  00082f05    00000019                       : args_main.obj (.text)
+                  00082f1e    00000018                       : ll_aox.obj (.text)
+                  00082f36    00000009                       : _lock.obj (.text)
+                  00082f3f    00000008     F2837xD_CodeStartBranch.obj (.text)
+                  00082f47    00000002     rts2800_fpu32.lib : pre_init.obj (.text)
+                  00082f49    00000001                       : startup.obj (.text)
 
-.econst    0    00090000    000001d0     
-                  00090000    000001c0     F2837xD_PieVect.obj (.econst)
-                  000901c0    00000010     sci_testbench.obj (.econst:.string)
+.econst    0    00090000    000001c0     
+                  00090000    000001c0     F2837xD_PieVect.obj (.econst:_PieVectTableInit)
 
 AdcaResultFile 
 *          1    00000b00    00000018     UNINITIALIZED
@@ -524,13 +528,13 @@ GpioDataRegsFile
 *          1    00007f00    00000030     UNINITIALIZED
                   00007f00    00000030     F2837xD_GlobalVariableDefs.obj (GpioDataRegsFile)
 
-.ebss      1    0000a800    00000025     UNINITIALIZED
+.ebss      1    0000a800    00000036     UNINITIALIZED
                   0000a800    00000018     F2837xD_CpuTimers.obj (.ebss)
-                  0000a818    00000004     rts2800_fpu32.lib : exit.obj (.ebss)
-                  0000a81c    00000004     sci_testbench.obj (.ebss)
-                  0000a820    00000002     rts2800_fpu32.lib : _lock.obj (.ebss:__lock)
-                  0000a822    00000002                       : _lock.obj (.ebss:__unlock)
-                  0000a824    00000001     F2837xD_sci_io.obj (.ebss)
+                  0000a818    00000013     sci_testbench.obj (.ebss)
+                  0000a82b    00000001     --HOLE--
+                  0000a82c    00000006     rts2800_fpu32.lib : exit.obj (.ebss)
+                  0000a832    00000002                       : _lock.obj (.ebss:__lock)
+                  0000a834    00000002                       : _lock.obj (.ebss:__unlock)
 
 Emif1RegsFile 
 *          1    00047000    00000070     UNINITIALIZED
@@ -615,6 +619,51 @@ DcsmZ1OtpFile
 DcsmZ2OtpFile 
 *          1    00078200    00000020     NOLOAD SECTION
                   00078200    00000020     F2837xD_GlobalVariableDefs.obj (DcsmZ2OtpFile)
+
+MODULE SUMMARY
+
+       Module                           code   ro data   rw data
+       ------                           ----   -------   -------
+    .\
+       sci_api.obj                      356    0         0      
+       sci_testbench.obj                249    0         31     
+       77D_sci.obj                      65     0         0      
+    +--+--------------------------------+------+---------+---------+
+       Total:                           670    0         31     
+                                                                
+    .\F2837xD_common\source\
+       F2837xD_DefaultISR.obj           1413   0         0      
+       F2837xD_SysCtrl.obj              717    0         0      
+       F2837xD_Gpio.obj                 580    0         0      
+       F2837xD_PieVect.obj              38     0         448    
+       F2837xD_CpuTimers.obj            124    0         24     
+       F2837xD_PieCtrl.obj              40     0         0      
+       F2837xD_CodeStartBranch.obj      10     0         0      
+       F2837xD_usDelay.obj              8      0         0      
+    +--+--------------------------------+------+---------+---------+
+       Total:                           2930   0         472    
+                                                                
+    .\F2837xD_headers\source\
+       F2837xD_GlobalVariableDefs.obj   0      0         8047   
+    +--+--------------------------------+------+---------+---------+
+       Total:                           0      0         8047   
+                                                                
+    E:/ti/ccsv6/tools/compiler/ti-cgt-c2000_15.12.1.LTS/lib/rts2800_fpu32.lib
+       boot.obj                         86     0         0      
+       cpy_tbl.obj                      70     0         0      
+       exit.obj                         41     0         20     
+       cpy_utils.obj                    26     0         0      
+       args_main.obj                    25     0         0      
+       ll_aox.obj                       24     0         0      
+       _lock.obj                        9      0         14     
+       pre_init.obj                     2      0         0      
+       startup.obj                      1      0         0      
+    +--+--------------------------------+------+---------+---------+
+       Total:                           284    0         34     
+                                                                
+       Stack:                           0      0         512    
+    +--+--------------------------------+------+---------+---------+
+       Grand Total:                     3884   0         9096   
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -753,14 +802,15 @@ address     data page           name
 0000a800     2a0 (0000a800)     _CpuTimer1
 0000a808     2a0 (0000a800)     _CpuTimer2
 0000a810     2a0 (0000a800)     _CpuTimer0
-0000a818     2a0 (0000a800)     ___TI_cleanup_ptr
-0000a81a     2a0 (0000a800)     ___TI_dtors_ptr
-0000a81c     2a0 (0000a800)     _RXRCV_flag
-0000a81d     2a0 (0000a800)     _ReceivedChar
-0000a81f     2a0 (0000a800)     _TXRDY_flag
-0000a820     2a0 (0000a800)     __lock
-0000a822     2a0 (0000a800)     __unlock
-0000a824     2a0 (0000a800)     _deviceOpen
+0000a818     2a0 (0000a800)     _RXRCV_flag
+0000a819     2a0 (0000a800)     _TXRDY_flag
+0000a81a     2a0 (0000a800)     _broadcast_flag
+0000a81b     2a0 (0000a800)     _ReceivedChar
+0000a82c     2a0 (0000a800)     ___TI_enable_exit_profile_output
+0000a82e     2a0 (0000a800)     ___TI_cleanup_ptr
+0000a830     2a0 (0000a800)     ___TI_dtors_ptr
+0000a832     2a0 (0000a800)     __lock
+0000a834     2a0 (0000a800)     __unlock
 
 00047000    11c0 (00047000)     _Emif1Regs
 
@@ -811,10 +861,10 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                                  
 ----  -------   ----                                  
 abs   ffffffff  .text                                 
-0     00082d37  C$$EXIT                               
-0     00082d50  LL$$AND                               
-0     00082d58  LL$$OR                                
-0     00082d60  LL$$XOR                               
+0     00082e74  C$$EXIT                               
+0     00082f1e  LL$$AND                               
+0     00082f26  LL$$OR                                
+0     00082f2e  LL$$XOR                               
 0     000820e6  _ADCA1_ISR                            
 0     00082366  _ADCA2_ISR                            
 0     00082370  _ADCA3_ISR                            
@@ -874,7 +924,7 @@ abs   ffffffff  .text
 1     00005d20  _Cmpss6Regs                           
 1     00005d40  _Cmpss7Regs                           
 1     00005d60  _Cmpss8Regs                           
-0     00082c4d  _ConfigCpuTimer                       
+0     00082ce1  _ConfigCpuTimer                       
 1     0005d300  _CpuSysRegs                           
 1     0000a810  _CpuTimer0                            
 1     00000c00  _CpuTimer0Regs                        
@@ -967,7 +1017,7 @@ abs   ffffffff  .text
 1     00047800  _Emif2Regs                            
 1     00000d01  _EmuBMode                             
 1     00000d00  _EmuKey                               
-0     00082ced  _EnableInterrupts                     
+0     00082ebc  _EnableInterrupts                     
 0     00008000  _F28x_usDelay                         
 0     00082550  _FLASH_CORRECTABLE_ERROR_ISR          
 0     00082424  _FPU_OVERFLOW_ISR                     
@@ -975,19 +1025,19 @@ abs   ffffffff  .text
 1     0005f800  _Flash0CtrlRegs                       
 1     0005fb00  _Flash0EccRegs                        
 1     00050024  _FlashPumpSemaphoreRegs               
-0     00082a79  _GPIO_EnableUnbondedIOPullups         
-0     00082a54  _GPIO_EnableUnbondedIOPullupsFor100Pin
-0     00082a3b  _GPIO_EnableUnbondedIOPullupsFor176Pin
-0     00082a8f  _GPIO_ReadPin                         
-0     000829e0  _GPIO_SetupLock                       
-0     000828be  _GPIO_SetupPinMux                     
-0     0008294c  _GPIO_SetupPinOptions                 
-0     00082a09  _GPIO_SetupXINT1Gpio                  
-0     00082a13  _GPIO_SetupXINT2Gpio                  
-0     00082a1d  _GPIO_SetupXINT3Gpio                  
-0     00082a27  _GPIO_SetupXINT4Gpio                  
-0     00082a31  _GPIO_SetupXINT5Gpio                  
-0     00082aa6  _GPIO_WritePin                        
+0     00082a73  _GPIO_EnableUnbondedIOPullups         
+0     00082a4e  _GPIO_EnableUnbondedIOPullupsFor100Pin
+0     00082a35  _GPIO_EnableUnbondedIOPullupsFor176Pin
+0     00082a89  _GPIO_ReadPin                         
+0     000829da  _GPIO_SetupLock                       
+0     000828ba  _GPIO_SetupPinMux                     
+0     00082946  _GPIO_SetupPinOptions                 
+0     00082a03  _GPIO_SetupXINT1Gpio                  
+0     00082a0d  _GPIO_SetupXINT2Gpio                  
+0     00082a17  _GPIO_SetupXINT3Gpio                  
+0     00082a21  _GPIO_SetupXINT4Gpio                  
+0     00082a2b  _GPIO_SetupXINT5Gpio                  
+0     00082aa0  _GPIO_WritePin                        
 1     00007c00  _GpioCtrlRegs                         
 1     00007f00  _GpioDataRegs                         
 0     00082844  _HALT                                 
@@ -1005,11 +1055,11 @@ abs   ffffffff  .text
 0     0008244c  _IPC2_ISR                             
 0     00082456  _IPC3_ISR                             
 0     00082738  _InitAuxPll                           
-0     00082c0c  _InitCpuTimers                        
+0     00082ca0  _InitCpuTimers                        
 0     0008287a  _InitGpio                             
 0     000825de  _InitPeripheralClocks                 
-0     00082cce  _InitPieCtrl                          
-0     00082cf6  _InitPieVectTable                     
+0     00082e9d  _InitPieCtrl                          
+0     00082ec5  _InitPieVectTable                     
 0     000825ad  _InitSysCtrl                          
 0     000826af  _InitSysPll                           
 1     00007900  _InputXbarRegs                        
@@ -1033,14 +1083,14 @@ abs   ffffffff  .text
 0     0008255a  _RAM_ACCESS_VIOLATION_ISR             
 0     00082546  _RAM_CORRECTABLE_ERROR_ISR            
 0     00082046  _RTOS_ISR                             
-1     0000a81c  _RXRCV_flag                           
+1     0000a818  _RXRCV_flag                           
 0     00086004  _RamfuncsLoadEnd                      
 abs   00000004  _RamfuncsLoadSize                     
 0     00086000  _RamfuncsLoadStart                    
 0     00008004  _RamfuncsRunEnd                       
 abs   00000004  _RamfuncsRunSize                      
 0     00008000  _RamfuncsRunStart                     
-1     0000a81d  _ReceivedChar                         
+1     0000a81b  _ReceivedChar                         
 0     00082689  _ReleaseFlashPump                     
 1     0005e608  _RomPrefetchRegs                      
 1     0005f540  _RomWaitStateRegs                     
@@ -1080,7 +1130,7 @@ abs   00000004  _RamfuncsRunSize
 0     00082122  _TIMER0_ISR                           
 0     00082028  _TIMER1_ISR                           
 0     00082032  _TIMER2_ISR                           
-1     0000a81f  _TXRDY_flag                           
+1     0000a819  _TXRDY_flag                           
 0     000824d8  _UPPA_ISR                             
 0     000824e2  _USBA_ISR                             
 0     000820c8  _USER10_ISR                           
@@ -1108,32 +1158,64 @@ abs   00000004  _RamfuncsRunSize
 1     00007070  _XintRegs                             
 1     00000600  __STACK_END                           
 abs   00000200  __STACK_SIZE                          
-1     0000a818  ___TI_cleanup_ptr                     
-1     0000a81a  ___TI_dtors_ptr                       
+1     0000a82e  ___TI_cleanup_ptr                     
+1     0000a830  ___TI_dtors_ptr                       
+1     0000a82c  ___TI_enable_exit_profile_output      
+abs   ffffffff  ___TI_pprof_out_hndl                  
+abs   ffffffff  ___TI_prof_data_size                  
+abs   ffffffff  ___TI_prof_data_start                 
 abs   ffffffff  ___binit__                            
 abs   ffffffff  ___c_args__                           
 0     00082000  ___cinit__                            
 abs   ffffffff  ___etext__                            
 abs   ffffffff  ___pinit__                            
 abs   ffffffff  ___text__                             
-0     00082d1e  __args_main                           
-1     0000a820  __lock                                
-0     00082d70  __nop                                 
-0     00082d6c  __register_lock                       
-0     00082d68  __register_unlock                     
+0     00082f05  __args_main                           
+1     0000a832  __lock                                
+0     00082f3e  __nop                                 
+0     00082f3a  __register_lock                       
+0     00082f36  __register_unlock                     
 1     00000400  __stack                               
-1     0000a822  __unlock                              
-0     00082d37  _abort                                
-0     00082c88  _c_int00                              
-0     00082b2d  _cpu_timer0_isr                       
-1     0000a824  _deviceOpen                           
-0     00082d39  _exit                                 
-0     00082b77  _main                                 
-0     00082b0e  _sciaRxFifoIsr                        
-0     00082ac4  _sciaTxFifoIsr                        
-0     00082bcf  _scia_fifo_init                       
-0     00082bf9  _scia_msg                             
-0     00082bed  _scia_xmit                            
+0     00082f49  __system_post_cinit                   
+0     00082f47  __system_pre_init                     
+1     0000a834  __unlock                              
+0     00082e74  _abort                                
+0     00082c0a  _broadcast                            
+0     00082c18  _broadcast_ctrl                       
+1     0000a81a  _broadcast_flag                       
+0     00082d97  _c_int00                              
+0     00082ded  _copy_in                              
+0     00082c86  _cpu_timer0_isr                       
+0     00082eeb  _ddcopy                               
+0     00082eeb  _dpcopy                               
+0     00082b99  _e_stop                               
+0     00082e76  _exit                                 
+0     00082bce  _get_accel                            
+0     00082bd8  _get_jerk                             
+0     00082be2  _get_l_disp_x                         
+0     00082bec  _get_l_disp_y                         
+0     00082bf6  _get_u_disp_x                         
+0     00082c00  _get_u_disp_y                         
+0     00082bc4  _get_vel                              
+0     00082abe  _init_params                          
+0     00082d1c  _main                                 
+0     00082acf  _parse_cmd                            
+0     00082eeb  _pdcopy                               
+0     00082eeb  _ppcopy                               
+0     00082c3b  _sciaRxFifoIsr                        
+0     00082c22  _sciaTxFifoIsr                        
+0     00082e33  _scia_fifo_init                       
+0     00082e61  _scia_msg                             
+0     00082e51  _scia_xmit                            
+0     00082c1d  _send_error                           
+0     00082b9b  _send_value                           
+0     00082ba6  _set_accel                            
+0     00082bab  _set_jerk                             
+0     00082bb0  _set_l_disp_x                         
+0     00082bb5  _set_l_disp_y                         
+0     00082bba  _set_u_disp_x                         
+0     00082bbf  _set_u_disp_y                         
+0     00082ba1  _set_vel                              
 abs   ffffffff  binit                                 
 0     00082000  cinit                                 
 0     00080000  code_start                            
@@ -1314,42 +1396,70 @@ page  address   name
 0     00082844  _HALT                                 
 0     0008285d  _HIB                                  
 0     0008287a  _InitGpio                             
-0     000828be  _GPIO_SetupPinMux                     
-0     0008294c  _GPIO_SetupPinOptions                 
-0     000829e0  _GPIO_SetupLock                       
-0     00082a09  _GPIO_SetupXINT1Gpio                  
-0     00082a13  _GPIO_SetupXINT2Gpio                  
-0     00082a1d  _GPIO_SetupXINT3Gpio                  
-0     00082a27  _GPIO_SetupXINT4Gpio                  
-0     00082a31  _GPIO_SetupXINT5Gpio                  
-0     00082a3b  _GPIO_EnableUnbondedIOPullupsFor176Pin
-0     00082a54  _GPIO_EnableUnbondedIOPullupsFor100Pin
-0     00082a79  _GPIO_EnableUnbondedIOPullups         
-0     00082a8f  _GPIO_ReadPin                         
-0     00082aa6  _GPIO_WritePin                        
-0     00082ac4  _sciaTxFifoIsr                        
-0     00082b0e  _sciaRxFifoIsr                        
-0     00082b2d  _cpu_timer0_isr                       
-0     00082b77  _main                                 
-0     00082bcf  _scia_fifo_init                       
-0     00082bed  _scia_xmit                            
-0     00082bf9  _scia_msg                             
-0     00082c0c  _InitCpuTimers                        
-0     00082c4d  _ConfigCpuTimer                       
-0     00082c88  _c_int00                              
-0     00082cce  _InitPieCtrl                          
-0     00082ced  _EnableInterrupts                     
-0     00082cf6  _InitPieVectTable                     
-0     00082d1e  __args_main                           
-0     00082d37  C$$EXIT                               
-0     00082d37  _abort                                
-0     00082d39  _exit                                 
-0     00082d50  LL$$AND                               
-0     00082d58  LL$$OR                                
-0     00082d60  LL$$XOR                               
-0     00082d68  __register_unlock                     
-0     00082d6c  __register_lock                       
-0     00082d70  __nop                                 
+0     000828ba  _GPIO_SetupPinMux                     
+0     00082946  _GPIO_SetupPinOptions                 
+0     000829da  _GPIO_SetupLock                       
+0     00082a03  _GPIO_SetupXINT1Gpio                  
+0     00082a0d  _GPIO_SetupXINT2Gpio                  
+0     00082a17  _GPIO_SetupXINT3Gpio                  
+0     00082a21  _GPIO_SetupXINT4Gpio                  
+0     00082a2b  _GPIO_SetupXINT5Gpio                  
+0     00082a35  _GPIO_EnableUnbondedIOPullupsFor176Pin
+0     00082a4e  _GPIO_EnableUnbondedIOPullupsFor100Pin
+0     00082a73  _GPIO_EnableUnbondedIOPullups         
+0     00082a89  _GPIO_ReadPin                         
+0     00082aa0  _GPIO_WritePin                        
+0     00082abe  _init_params                          
+0     00082acf  _parse_cmd                            
+0     00082b99  _e_stop                               
+0     00082b9b  _send_value                           
+0     00082ba1  _set_vel                              
+0     00082ba6  _set_accel                            
+0     00082bab  _set_jerk                             
+0     00082bb0  _set_l_disp_x                         
+0     00082bb5  _set_l_disp_y                         
+0     00082bba  _set_u_disp_x                         
+0     00082bbf  _set_u_disp_y                         
+0     00082bc4  _get_vel                              
+0     00082bce  _get_accel                            
+0     00082bd8  _get_jerk                             
+0     00082be2  _get_l_disp_x                         
+0     00082bec  _get_l_disp_y                         
+0     00082bf6  _get_u_disp_x                         
+0     00082c00  _get_u_disp_y                         
+0     00082c0a  _broadcast                            
+0     00082c18  _broadcast_ctrl                       
+0     00082c1d  _send_error                           
+0     00082c22  _sciaTxFifoIsr                        
+0     00082c3b  _sciaRxFifoIsr                        
+0     00082c86  _cpu_timer0_isr                       
+0     00082ca0  _InitCpuTimers                        
+0     00082ce1  _ConfigCpuTimer                       
+0     00082d1c  _main                                 
+0     00082d97  _c_int00                              
+0     00082ded  _copy_in                              
+0     00082e33  _scia_fifo_init                       
+0     00082e51  _scia_xmit                            
+0     00082e61  _scia_msg                             
+0     00082e74  C$$EXIT                               
+0     00082e74  _abort                                
+0     00082e76  _exit                                 
+0     00082e9d  _InitPieCtrl                          
+0     00082ebc  _EnableInterrupts                     
+0     00082ec5  _InitPieVectTable                     
+0     00082eeb  _ddcopy                               
+0     00082eeb  _dpcopy                               
+0     00082eeb  _pdcopy                               
+0     00082eeb  _ppcopy                               
+0     00082f05  __args_main                           
+0     00082f1e  LL$$AND                               
+0     00082f26  LL$$OR                                
+0     00082f2e  LL$$XOR                               
+0     00082f36  __register_unlock                     
+0     00082f3a  __register_lock                       
+0     00082f3e  __nop                                 
+0     00082f47  __system_pre_init                     
+0     00082f49  __system_post_cinit                   
 0     00086000  _RamfuncsLoadStart                    
 0     00086004  _RamfuncsLoadEnd                      
 0     00090000  _PieVectTableInit                     
@@ -1432,14 +1542,15 @@ page  address   name
 1     0000a800  _CpuTimer1                            
 1     0000a808  _CpuTimer2                            
 1     0000a810  _CpuTimer0                            
-1     0000a818  ___TI_cleanup_ptr                     
-1     0000a81a  ___TI_dtors_ptr                       
-1     0000a81c  _RXRCV_flag                           
-1     0000a81d  _ReceivedChar                         
-1     0000a81f  _TXRDY_flag                           
-1     0000a820  __lock                                
-1     0000a822  __unlock                              
-1     0000a824  _deviceOpen                           
+1     0000a818  _RXRCV_flag                           
+1     0000a819  _TXRDY_flag                           
+1     0000a81a  _broadcast_flag                       
+1     0000a81b  _ReceivedChar                         
+1     0000a82c  ___TI_enable_exit_profile_output      
+1     0000a82e  ___TI_cleanup_ptr                     
+1     0000a830  ___TI_dtors_ptr                       
+1     0000a832  __lock                                
+1     0000a834  __unlock                              
 1     00047000  _Emif1Regs                            
 1     00047800  _Emif2Regs                            
 1     00050000  _IpcRegs                              
@@ -1466,6 +1577,9 @@ abs   00000004  _RamfuncsLoadSize
 abs   00000004  _RamfuncsRunSize                      
 abs   00000200  __STACK_SIZE                          
 abs   ffffffff  .text                                 
+abs   ffffffff  ___TI_pprof_out_hndl                  
+abs   ffffffff  ___TI_prof_data_size                  
+abs   ffffffff  ___TI_prof_data_start                 
 abs   ffffffff  ___binit__                            
 abs   ffffffff  ___c_args__                           
 abs   ffffffff  ___etext__                            
@@ -1475,4 +1589,4 @@ abs   ffffffff  binit
 abs   ffffffff  etext                                 
 abs   ffffffff  pinit                                 
 
-[329 symbols]
+[361 symbols]
