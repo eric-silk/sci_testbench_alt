@@ -12,7 +12,7 @@
 #define SCI_API_H_
 
 // structure to hold operating params, use for setpoints and current values
-extern struct params {
+struct params {
 	float vel;
 	float accel;
 	float jerk;
@@ -43,8 +43,6 @@ extern void init_params( struct params *values);
  * 		 cmd = 0x59 (SEND_VEL with NNN = 0b001) can happen
  * Future users can implement this functionality if desired.
  */
-
-#define EMERGENCY 			0xFFFF // emergency stop
 
 #define NULL_CMD 			0x0000 // NULL command
 
@@ -90,17 +88,17 @@ int extract_cmd(char *cmd, int *index, char *extracted);
 int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point);
 int e_stop();
 
-int send_value(char cmd, float val);
+int send_value(char cmd, float val1, float val2);
 
 // Function prototypes to set values
-int set_vel(Uint16 vel);
-int set_accel(Uint16 accel);
-int set_jerk(Uint16 jerk);
+int set_vel(float *vel);
+int set_accel(float *accel);
+int set_jerk(float *jerk);
 
 // Function prototypes to get values
-int get_vel();
-int get_accel();
-int get_jerk();
+int get_vel(float vel);
+int get_accel(float accel);
+int get_jerk(float jerk);
 
 int get_l_disp(float x_disp, float y_disp);
 int get_u_disp(float x_disp, float y_disp);

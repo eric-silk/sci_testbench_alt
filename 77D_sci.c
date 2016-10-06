@@ -53,14 +53,28 @@ void scia_fifo_init()
 
 
 
-// Transmit a character from the SCI
-void scia_xmit(int a)
+// Transmit a character/int from the SCI
+void scia_xmit_int(int a)
 {
     while (SciaRegs.SCIFFTX.bit.TXFFST != 0) {}
     //sends upper and then lower 8 bits
-    SciaRegs.SCITXBUF.all = (a & 0xFF00);
-    SciaRegs.SCITXBUF.all = (a & 0x00FF);
+    //SciaRegs.SCITXBUF.all = (a & 0xFF00);
+    SciaRegs.SCITXBUF.all = a;
 }
+//split and transmit a float over 4 bytes
+void scia_xmit_float(float a)
+{
+	int temp = (int)((a & 0xFF000000) >> 6);
+	while (SciaRegs.SCIFFTX.bit.TXFFST != 0); //block until space
+	SciaRegs.SCITXBUF.all = temp;
+	temp = (int)((a & 0x00FF0000) >> 4);
+	SciaRegs.SCITXBUF.all = temp;
+	temp = (int)((a & 0x0000FF00) >> 2);
+	SciaRegs.SCITXBUF.all = temp;
+	temp = (int)(a & 0x000000FF);
+	SciaRegs.SCITXBUF.all = temp;
+}
+
 // Transmit a string from the SCI
 void scia_msg(char * msg)
 {
@@ -68,7 +82,7 @@ void scia_msg(char * msg)
     i = 0;
     while(msg[i] != '\0')
     {
-        scia_xmit(msg[i]);
+        scia_xmit_int(msg[i]);
         i++;
     }
 }

@@ -5,7 +5,7 @@
  *      Author: Eric
  */
 #include "sci_api.h"
-
+#include "77D_sci.h"
 
 
 void init_params( struct params *values)
@@ -39,13 +39,13 @@ int extract_cmd(char *cmd, int *index, char *extracted)
 
 }
 
-int parse_cmd(char cmd, Uint16 num_elem, struct params *set_point, struct params *op_point)
+int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point)
 {
 	int rslt = 0;
 	int index = 0;
 	char extracted[2];
 	while(num_elem > 0){
-		num_elem -= extract_cmd( *cmd, *index, *extracted);
+		num_elem -= extract_cmd( cmd, &index, extracted);
 		switch(extracted[0])
 		{
 			case EMERGENCY :
@@ -66,7 +66,7 @@ int parse_cmd(char cmd, Uint16 num_elem, struct params *set_point, struct params
 				set_jerk(&set_point->jerk);
 				break;
 
-			case GET_VELOCITY:
+			case GET_VEL:
 				get_vel(op_point->vel);
 				break;
 
@@ -104,6 +104,7 @@ int e_stop(struct params *set_point){
 
 int send_value(char cmd, float val1, float val2){ //set val2 to NULL when xmitting one value
 
+
 	return 1; //if success
 }
 
@@ -126,56 +127,47 @@ int set_jerk(float *jerk){
 // Functions to get values
 int get_vel(float vel){
 	//code to obtain velocity
-	send_value(SEND_VELOCITY, vel);
+	send_value(SEND_VEL, vel, NULL);
 	return 1; //sucess
 }
 
 int get_accel(float accel){
-	send_value(SEND_ACCEL, accel);
+	send_value(SEND_ACCEL, accel, NULL);
 	return 1; //sucess
 }
 
 int get_jerk(float jerk){
-	send_value(SEND_JERK, jerk);
+	send_value(SEND_JERK, jerk, NULL);
 	return 1; //sucess
 }
 
-int get_l_disp(float dispx, float dispy){
-	send_value(SEND_L_DISP_X, l_disp_x);
+int get_l_disp(float l_disp_x, float l_disp_y){
+	send_value(SEND_L_DISP, l_disp_x, l_disp_y);
 	return 1; //sucess
 }
 
-int get_l_disp_y(){
-	Uint16 l_disp_y = 0;
-	//code to obtain lower y displacement
-	send_value(SEND_L_DISP_Y, l_disp_y);
-	return 1; //sucess
-}
-
-int get_u_disp_x(){
-	Uint16 u_disp_x = 0;
-	//code to obtain upper x displacement
-	send_value(SEND_U_DISP_X, u_disp_x);
-	return 1; //sucess
-}
-
-int get_u_disp_y(){
-	Uint16 u_disp_y = 0;
-	//code to obtain upper y displacement
-	send_value(SEND_U_DISP_Y, u_disp_y);
+int get_u_disp(float u_disp_x, float u_disp_y){
+	send_value(SEND_U_DISP, u_disp_x, u_disp_y);
 	return 1; //sucess
 }
 
 // Functions for broadcast handling
 int broadcast(int enable, struct params *values){
-	Uint16 error;
+	//Uint16 error;
 	// "burst" transmission of all relevant values
 	// this may require some handshaking to prevent FIFO overflow
 
 	//code to check broadcast enable
 
 	if(enable){
-
+		scia_xmit_int(SEND_BULK);
+		scia_xmit_float(values->vel);
+		scia_xmit_float(values->accel);
+		scia_xmit_float(values->jerk);
+		scia_xmit_float(values->l_disp_x);
+		scia_xmit_float(values->l_disp_y);
+		scia_xmit_float(values->u_disp_x);
+		scia_xmit_float(values->u_disp_y);
 		//code to check for error during transmission attempts
 		if(error){
 			return 0; //failure

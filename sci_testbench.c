@@ -27,13 +27,14 @@ interrupt void sciaRxFifoIsr(void);
 __interrupt void cpu_timer0_isr(void);
 void scia_fifo_init(void);
 void error(void);
-void scia_xmit(int a);
-void scia_msg(char * msg);
+//void scia_xmit(int a);
+//void scia_msg(char * msg);
 
 // Global variables
 int RXRCV_flag = 0;
 int TXRDY_flag = 0;
 int broadcast_flag = 0;
+char ReceivedChar[16];
 
 
 void main(void)
@@ -42,8 +43,6 @@ void main(void)
 	struct params op_point;
 	int broadcast_enable = 1;
 	char ReceivedChar[32]; // Used for checking the received data
-	Uint16 num_chars = 0;
-
 
 // Step 1. Initialize System Control:
 // PLL, WatchDog, enable Peripheral Clocks
@@ -121,6 +120,8 @@ void main(void)
 	init_params(&set_point);
 	init_params(&op_point);
 
+	scia_msg("\r\nReady to accept values. \r\n");
+
 // Step 6. IDLE loop. Just sit and loop forever (optional):
 	for(;;)
 	{
@@ -133,10 +134,11 @@ void main(void)
 		{
 			for(;RXRCV_flag > 0; RXRCV_flag--)
 			{
-				num_chars++;
-				ReceivedChar[num_chars - 1];
+
+				parse_cmd(ReceivedChar, RXRCV_flag, &set_point, &op_point);
+
 			}
-			parse_cmd(ReceivedChar, num_chars);
+
 
 		}
 	}
