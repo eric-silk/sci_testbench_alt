@@ -67,15 +67,17 @@ void scia_xmit_float(float a)
 	int i = 0;
 	union {
 		float b;
-		Uint16 bytes[4];
+		Uint16 bytes[2];
 	} temp;
 
 	temp.b = a;
 
 	while (SciaRegs.SCIFFTX.bit.TXFFST != 0); //block until space
-	for(; i<4; i++)
+	for(; i<2; i++)
 	{
-		SciaRegs.SCITXBUF.all = temp.bytes[i];
+		//Workaround for C2000 not supporting 8 bit types
+		SciaRegs.SCITXBUF.all = ((temp.bytes[i] & 0xFF00) >> 8);
+		SciaRegs.SCITXBUF.all = (temp.bytes[i] & 0xFF);
 	}
 }
 

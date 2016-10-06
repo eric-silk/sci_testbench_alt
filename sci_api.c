@@ -11,7 +11,7 @@
 
 void init_params( struct params *values)
 {
-	values->vel = 0;
+	values->vel = 202084.515625; // "HEY!" when viewed as ASCII
 	values->accel = 0;
 	values->jerk = 0;
 	values->l_disp_x = 0;

@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker Unix v15.12.3                  
 ******************************************************************************
->> Linked Thu Oct  6 09:23:58 2016
+>> Linked Thu Oct  6 11:45:34 2016
 
 OUTPUT FILE NAME:   <sci_testbench_alt.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 00082df4
+ENTRY POINT SYMBOL: "_c_int00"  address: 00082df8
 
 
 MEMORY CONFIGURATION
@@ -23,7 +23,7 @@ PAGE 0:
   RAMGS15               0001b000   00001000  00000000  00001000  RWIX
   BEGIN                 00080000   00000002  00000002  00000000  RWIX
   FLASHA                00080002   00001ffe  00000000  00001ffe  RWIX
-  FLASHB                00082000   00002000  00000f64  0000109c  RWIX
+  FLASHB                00082000   00002000  00000f68  00001098  RWIX
   FLASHC                00084000   00002000  00000000  00002000  RWIX
   FLASHD                00086000   00002000  00000004  00001ffc  RWIX
   FLASHE                00088000   00008000  00000000  00008000  RWIX
@@ -591,27 +591,27 @@ CpuSysRegsFile
 *          1    0005d300    00000082     UNINITIALIZED
                   0005d300    00000082     F2837xD_GlobalVariableDefs.obj (CpuSysRegsFile)
 
-.text      0    00082028    00000f3e     
+.text      0    00082028    00000f42     
                   00082028    00000585     F2837xD_DefaultISR.obj (.text:retain)
                   000825ad    000002cd     F2837xD_SysCtrl.obj (.text)
                   0008287a    00000244     F2837xD_Gpio.obj (.text)
-                  00082abe    00000154     sci_api.obj (.text)
-                  00082c12    0000008e     sci_testbench.obj (.text)
-                  00082ca0    0000007e     sci_testbench.obj (.text:retain)
-                  00082d1e    0000007c     F2837xD_CpuTimers.obj (.text)
-                  00082d9a    0000005a     77D_sci.obj (.text)
-                  00082df4    00000056     rts2800_fpu32.lib : boot.obj (.text)
-                  00082e4a    00000046                       : cpy_tbl.obj (.text)
-                  00082e90    00000029                       : exit.obj (.text)
-                  00082eb9    00000028     F2837xD_PieCtrl.obj (.text)
-                  00082ee1    00000026     F2837xD_PieVect.obj (.text)
-                  00082f07    0000001a     rts2800_fpu32.lib : cpy_utils.obj (.text)
-                  00082f21    00000019                       : args_main.obj (.text)
-                  00082f3a    00000018                       : ll_aox.obj (.text)
-                  00082f52    00000009                       : _lock.obj (.text)
-                  00082f5b    00000008     F2837xD_CodeStartBranch.obj (.text)
-                  00082f63    00000002     rts2800_fpu32.lib : pre_init.obj (.text)
-                  00082f65    00000001                       : startup.obj (.text)
+                  00082abe    00000158     sci_api.obj (.text)
+                  00082c16    0000008e     sci_testbench.obj (.text)
+                  00082ca4    0000007e     sci_testbench.obj (.text:retain)
+                  00082d22    0000007c     F2837xD_CpuTimers.obj (.text)
+                  00082d9e    0000005a     77D_sci.obj (.text)
+                  00082df8    00000056     rts2800_fpu32.lib : boot.obj (.text)
+                  00082e4e    00000046                       : cpy_tbl.obj (.text)
+                  00082e94    00000029                       : exit.obj (.text)
+                  00082ebd    00000028     F2837xD_PieCtrl.obj (.text)
+                  00082ee5    00000026     F2837xD_PieVect.obj (.text)
+                  00082f0b    0000001a     rts2800_fpu32.lib : cpy_utils.obj (.text)
+                  00082f25    00000019                       : args_main.obj (.text)
+                  00082f3e    00000018                       : ll_aox.obj (.text)
+                  00082f56    00000009                       : _lock.obj (.text)
+                  00082f5f    00000008     F2837xD_CodeStartBranch.obj (.text)
+                  00082f67    00000002     rts2800_fpu32.lib : pre_init.obj (.text)
+                  00082f69    00000001                       : startup.obj (.text)
 
 .ebss      1    0000a800    00000036     UNINITIALIZED
                   0000a800    00000018     F2837xD_CpuTimers.obj (.ebss)
@@ -626,11 +626,11 @@ MODULE SUMMARY
        Module                           code   ro data   rw data
        ------                           ----   -------   -------
     ./
-       sci_api.obj                      340    0         0      
+       sci_api.obj                      344    0         0      
        sci_testbench.obj                268    0         60     
        77D_sci.obj                      90     0         0      
     +--+--------------------------------+------+---------+---------+
-       Total:                           698    0         60     
+       Total:                           702    0         60     
                                                                 
     ./F2837xD_common/source/
        F2837xD_DefaultISR.obj           1413   0         0      
@@ -664,7 +664,7 @@ MODULE SUMMARY
                                                                 
        Stack:                           0      0         512    
     +--+--------------------------------+------+---------+---------+
-       Grand Total:                     3912   0         9125   
+       Grand Total:                     3916   0         9125   
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -862,10 +862,10 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                                  
 ----  -------   ----                                  
 abs   ffffffff  .text                                 
-0     00082e90  C$$EXIT                               
-0     00082f3a  LL$$AND                               
-0     00082f42  LL$$OR                                
-0     00082f4a  LL$$XOR                               
+0     00082e94  C$$EXIT                               
+0     00082f3e  LL$$AND                               
+0     00082f46  LL$$OR                                
+0     00082f4e  LL$$XOR                               
 0     000820e6  _ADCA1_ISR                            
 0     00082366  _ADCA2_ISR                            
 0     00082370  _ADCA3_ISR                            
@@ -925,7 +925,7 @@ abs   ffffffff  .text
 1     00005d20  _Cmpss6Regs                           
 1     00005d40  _Cmpss7Regs                           
 1     00005d60  _Cmpss8Regs                           
-0     00082d5f  _ConfigCpuTimer                       
+0     00082d63  _ConfigCpuTimer                       
 1     0005d300  _CpuSysRegs                           
 1     0000a810  _CpuTimer0                            
 1     00000c00  _CpuTimer0Regs                        
@@ -1018,7 +1018,7 @@ abs   ffffffff  .text
 1     00047800  _Emif2Regs                            
 1     00000d01  _EmuBMode                             
 1     00000d00  _EmuKey                               
-0     00082ed8  _EnableInterrupts                     
+0     00082edc  _EnableInterrupts                     
 0     00008000  _F28x_usDelay                         
 0     00082550  _FLASH_CORRECTABLE_ERROR_ISR          
 0     00082424  _FPU_OVERFLOW_ISR                     
@@ -1056,11 +1056,11 @@ abs   ffffffff  .text
 0     0008244c  _IPC2_ISR                             
 0     00082456  _IPC3_ISR                             
 0     00082738  _InitAuxPll                           
-0     00082d1e  _InitCpuTimers                        
+0     00082d22  _InitCpuTimers                        
 0     0008287a  _InitGpio                             
 0     000825de  _InitPeripheralClocks                 
-0     00082eb9  _InitPieCtrl                          
-0     00082ee1  _InitPieVectTable                     
+0     00082ebd  _InitPieCtrl                          
+0     00082ee5  _InitPieVectTable                     
 0     000825ad  _InitSysCtrl                          
 0     000826af  _InitSysPll                           
 1     00007900  _InputXbarRegs                        
@@ -1171,48 +1171,48 @@ abs   ffffffff  ___c_args__
 abs   ffffffff  ___etext__                            
 abs   ffffffff  ___pinit__                            
 abs   ffffffff  ___text__                             
-0     00082f21  __args_main                           
+0     00082f25  __args_main                           
 1     0000a832  __lock                                
-0     00082f5a  __nop                                 
-0     00082f56  __register_lock                       
-0     00082f52  __register_unlock                     
+0     00082f5e  __nop                                 
+0     00082f5a  __register_lock                       
+0     00082f56  __register_unlock                     
 1     00000400  __stack                               
-0     00082f65  __system_post_cinit                   
-0     00082f63  __system_pre_init                     
+0     00082f69  __system_post_cinit                   
+0     00082f67  __system_pre_init                     
 1     0000a834  __unlock                              
-0     00082e90  _abort                                
-0     00082bd2  _broadcast                            
-0     00082c08  _broadcast_ctrl                       
+0     00082e94  _abort                                
+0     00082bd6  _broadcast                            
+0     00082c0c  _broadcast_ctrl                       
 1     0000a819  _broadcast_flag                       
-0     00082df4  _c_int00                              
-0     00082e4a  _copy_in                              
-0     00082d04  _cpu_timer0_isr                       
-0     00082f07  _ddcopy                               
-0     00082f07  _dpcopy                               
-0     00082b74  _e_stop                               
-0     00082e92  _exit                                 
-0     00082add  _extract_cmd                          
-0     00082ba8  _get_accel                            
-0     00082bb2  _get_jerk                             
-0     00082bbc  _get_l_disp                           
-0     00082bc7  _get_u_disp                           
-0     00082b9e  _get_vel                              
+0     00082df8  _c_int00                              
+0     00082e4e  _copy_in                              
+0     00082d08  _cpu_timer0_isr                       
+0     00082f0b  _ddcopy                               
+0     00082f0b  _dpcopy                               
+0     00082b78  _e_stop                               
+0     00082e96  _exit                                 
+0     00082ae1  _extract_cmd                          
+0     00082bac  _get_accel                            
+0     00082bb6  _get_jerk                             
+0     00082bc0  _get_l_disp                           
+0     00082bcb  _get_u_disp                           
+0     00082ba2  _get_vel                              
 0     00082abe  _init_params                          
-0     00082c12  _main                                 
-0     00082b04  _parse_cmd                            
-0     00082f07  _pdcopy                               
-0     00082f07  _ppcopy                               
-0     00082cb9  _sciaRxFifoIsr                        
-0     00082ca0  _sciaTxFifoIsr                        
-0     00082d9a  _scia_fifo_init                       
-0     00082de1  _scia_msg                             
-0     00082dc4  _scia_xmit_float                      
-0     00082db8  _scia_xmit_int                        
-0     00082c0d  _send_error                           
-0     00082b86  _send_value                           
-0     00082b94  _set_accel                            
-0     00082b99  _set_jerk                             
-0     00082b8f  _set_vel                              
+0     00082c16  _main                                 
+0     00082b08  _parse_cmd                            
+0     00082f0b  _pdcopy                               
+0     00082f0b  _ppcopy                               
+0     00082cbd  _sciaRxFifoIsr                        
+0     00082ca4  _sciaTxFifoIsr                        
+0     00082d9e  _scia_fifo_init                       
+0     00082de5  _scia_msg                             
+0     00082dc8  _scia_xmit_float                      
+0     00082dbc  _scia_xmit_int                        
+0     00082c11  _send_error                           
+0     00082b8a  _send_value                           
+0     00082b98  _set_accel                            
+0     00082b9d  _set_jerk                             
+0     00082b93  _set_vel                              
 abs   ffffffff  binit                                 
 0     00082000  cinit                                 
 0     00080000  code_start                            
@@ -1407,52 +1407,52 @@ page  address   name
 0     00082a89  _GPIO_ReadPin                         
 0     00082aa0  _GPIO_WritePin                        
 0     00082abe  _init_params                          
-0     00082add  _extract_cmd                          
-0     00082b04  _parse_cmd                            
-0     00082b74  _e_stop                               
-0     00082b86  _send_value                           
-0     00082b8f  _set_vel                              
-0     00082b94  _set_accel                            
-0     00082b99  _set_jerk                             
-0     00082b9e  _get_vel                              
-0     00082ba8  _get_accel                            
-0     00082bb2  _get_jerk                             
-0     00082bbc  _get_l_disp                           
-0     00082bc7  _get_u_disp                           
-0     00082bd2  _broadcast                            
-0     00082c08  _broadcast_ctrl                       
-0     00082c0d  _send_error                           
-0     00082c12  _main                                 
-0     00082ca0  _sciaTxFifoIsr                        
-0     00082cb9  _sciaRxFifoIsr                        
-0     00082d04  _cpu_timer0_isr                       
-0     00082d1e  _InitCpuTimers                        
-0     00082d5f  _ConfigCpuTimer                       
-0     00082d9a  _scia_fifo_init                       
-0     00082db8  _scia_xmit_int                        
-0     00082dc4  _scia_xmit_float                      
-0     00082de1  _scia_msg                             
-0     00082df4  _c_int00                              
-0     00082e4a  _copy_in                              
-0     00082e90  C$$EXIT                               
-0     00082e90  _abort                                
-0     00082e92  _exit                                 
-0     00082eb9  _InitPieCtrl                          
-0     00082ed8  _EnableInterrupts                     
-0     00082ee1  _InitPieVectTable                     
-0     00082f07  _ddcopy                               
-0     00082f07  _dpcopy                               
-0     00082f07  _pdcopy                               
-0     00082f07  _ppcopy                               
-0     00082f21  __args_main                           
-0     00082f3a  LL$$AND                               
-0     00082f42  LL$$OR                                
-0     00082f4a  LL$$XOR                               
-0     00082f52  __register_unlock                     
-0     00082f56  __register_lock                       
-0     00082f5a  __nop                                 
-0     00082f63  __system_pre_init                     
-0     00082f65  __system_post_cinit                   
+0     00082ae1  _extract_cmd                          
+0     00082b08  _parse_cmd                            
+0     00082b78  _e_stop                               
+0     00082b8a  _send_value                           
+0     00082b93  _set_vel                              
+0     00082b98  _set_accel                            
+0     00082b9d  _set_jerk                             
+0     00082ba2  _get_vel                              
+0     00082bac  _get_accel                            
+0     00082bb6  _get_jerk                             
+0     00082bc0  _get_l_disp                           
+0     00082bcb  _get_u_disp                           
+0     00082bd6  _broadcast                            
+0     00082c0c  _broadcast_ctrl                       
+0     00082c11  _send_error                           
+0     00082c16  _main                                 
+0     00082ca4  _sciaTxFifoIsr                        
+0     00082cbd  _sciaRxFifoIsr                        
+0     00082d08  _cpu_timer0_isr                       
+0     00082d22  _InitCpuTimers                        
+0     00082d63  _ConfigCpuTimer                       
+0     00082d9e  _scia_fifo_init                       
+0     00082dbc  _scia_xmit_int                        
+0     00082dc8  _scia_xmit_float                      
+0     00082de5  _scia_msg                             
+0     00082df8  _c_int00                              
+0     00082e4e  _copy_in                              
+0     00082e94  C$$EXIT                               
+0     00082e94  _abort                                
+0     00082e96  _exit                                 
+0     00082ebd  _InitPieCtrl                          
+0     00082edc  _EnableInterrupts                     
+0     00082ee5  _InitPieVectTable                     
+0     00082f0b  _ddcopy                               
+0     00082f0b  _dpcopy                               
+0     00082f0b  _pdcopy                               
+0     00082f0b  _ppcopy                               
+0     00082f25  __args_main                           
+0     00082f3e  LL$$AND                               
+0     00082f46  LL$$OR                                
+0     00082f4e  LL$$XOR                               
+0     00082f56  __register_unlock                     
+0     00082f5a  __register_lock                       
+0     00082f5e  __nop                                 
+0     00082f67  __system_pre_init                     
+0     00082f69  __system_post_cinit                   
 0     00086000  _RamfuncsLoadStart                    
 0     00086004  _RamfuncsLoadEnd                      
 0     00090000  _PieVectTableInit                     
