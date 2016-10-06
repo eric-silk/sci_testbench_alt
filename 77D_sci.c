@@ -64,15 +64,19 @@ void scia_xmit_int(int a)
 //split and transmit a float over 4 bytes
 void scia_xmit_float(float a)
 {
-	int temp = (int)((a & 0xFF000000) >> 6);
+	int i = 0;
+	union {
+		float b;
+		Uint16 bytes[4];
+	} temp;
+
+	temp.b = a;
+
 	while (SciaRegs.SCIFFTX.bit.TXFFST != 0); //block until space
-	SciaRegs.SCITXBUF.all = temp;
-	temp = (int)((a & 0x00FF0000) >> 4);
-	SciaRegs.SCITXBUF.all = temp;
-	temp = (int)((a & 0x0000FF00) >> 2);
-	SciaRegs.SCITXBUF.all = temp;
-	temp = (int)(a & 0x000000FF);
-	SciaRegs.SCITXBUF.all = temp;
+	for(; i<4; i++)
+	{
+		SciaRegs.SCITXBUF.all = temp.bytes[i];
+	}
 }
 
 // Transmit a string from the SCI

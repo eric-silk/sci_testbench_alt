@@ -4,6 +4,7 @@
  *  Created on: Apr 12, 2016
  *      Author: Eric
  */
+
 #include "sci_api.h"
 #include "77D_sci.h"
 
@@ -158,7 +159,6 @@ int broadcast(int enable, struct params *values){
 	// this may require some handshaking to prevent FIFO overflow
 
 	//code to check broadcast enable
-
 	if(enable){
 		scia_xmit_int(SEND_BULK);
 		scia_xmit_float(values->vel);
@@ -169,16 +169,9 @@ int broadcast(int enable, struct params *values){
 		scia_xmit_float(values->u_disp_x);
 		scia_xmit_float(values->u_disp_y);
 		//code to check for error during transmission attempts
-		if(error){
-			return 0; //failure
-		}
-		else{
-			return 1; //broadcast success
-		}
+		return 1;
 	}
-	else{
-		return 2; //broadcast disabled
-	}
+	return 0;
 }
 int broadcast_ctrl(int enable){
 	// code to set an enable value
