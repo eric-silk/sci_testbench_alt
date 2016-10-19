@@ -76,8 +76,8 @@ void scia_xmit_float(float a)
 	for(; i<2; i++)
 	{
 		//Workaround for C2000 not supporting 8 bit types
-		SciaRegs.SCITXBUF.all = ((temp.bytes[i] & 0xFF00) >> 8);
-		SciaRegs.SCITXBUF.all = (temp.bytes[i] & 0xFF);
+		SciaRegs.SCITXBUF.all = ((temp.bytes[1-i] & 0xFF00) >> 8);
+		SciaRegs.SCITXBUF.all = (temp.bytes[1-i] & 0xFF);
 	}
 }
 

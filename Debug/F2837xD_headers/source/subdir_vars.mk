@@ -13,10 +13,10 @@ C_DEPS += \
 ./F2837xD_headers/source/F2837xD_GlobalVariableDefs.d 
 
 C_DEPS__QUOTED += \
-"F2837xD_headers/source/F2837xD_GlobalVariableDefs.d" 
+"F2837xD_headers\source\F2837xD_GlobalVariableDefs.d" 
 
 OBJS__QUOTED += \
-"F2837xD_headers/source/F2837xD_GlobalVariableDefs.obj" 
+"F2837xD_headers\source\F2837xD_GlobalVariableDefs.obj" 
 
 C_SRCS__QUOTED += \
 "../F2837xD_headers/source/F2837xD_GlobalVariableDefs.c" 

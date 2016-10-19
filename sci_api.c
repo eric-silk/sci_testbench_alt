@@ -11,7 +11,9 @@
 
 void init_params( struct params *values)
 {
-	values->vel = 202084.515625; // "HEY!" when viewed as ASCII
+	//values->vel = 202084.515625; // "HEY!" when viewed as ASCII, uncomment for PuTTy testing
+	//default values below
+	values->vel = 0;
 	values->accel = 0;
 	values->jerk = 0;
 	values->l_disp_x = 0;
@@ -160,14 +162,14 @@ int broadcast(int enable, struct params *values){
 
 	//code to check broadcast enable
 	if(enable){
-		scia_xmit_int(SEND_BULK);
+		//scia_xmit_int(SEND_BULK);
 		scia_xmit_float(values->vel);
-		scia_xmit_float(values->accel);
+		/*scia_xmit_float(values->accel);
 		scia_xmit_float(values->jerk);
 		scia_xmit_float(values->l_disp_x);
 		scia_xmit_float(values->l_disp_y);
 		scia_xmit_float(values->u_disp_x);
-		scia_xmit_float(values->u_disp_y);
+		scia_xmit_float(values->u_disp_y);*/
 		//code to check for error during transmission attempts
 		return 1;
 	}

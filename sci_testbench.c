@@ -15,6 +15,7 @@
 #include "F28x_Project.h"     // Device Headerfile and Examples Include File
 #include "77D_sci.h"		  // Device specific SCI functions
 #include "sci_api.h"
+#include <stdlib.h>
 
 #define CPU_FREQ    60E6
 #define LSPCLK_FREQ CPU_FREQ/4
@@ -127,6 +128,8 @@ void main(void)
 	{
 		if(broadcast_flag == 1)
 		{
+
+			update_op_point(&op_point, set_point);
 			broadcast(broadcast_enable, &op_point);
 			broadcast_flag = 0;
 		}
@@ -178,6 +181,18 @@ __interrupt void cpu_timer0_isr(void){
 
 	// Acknowledge this interrupt to receive more interrupts from group 1
 	PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
+}
+
+void update_op_point(struct params *op, struct params set)
+{
+	op->accel = set.accel + (float) (rand()%10);
+	op->jerk = set.jerk + (float) (rand()%10);
+	op->l_disp_x = set.l_disp_x + (float) (rand()%10);
+	op->l_disp_y = set.l_disp_y + (float) (rand()%10);
+	op->u_disp_x = set.u_disp_x + (float) (rand()%10);
+	op->u_disp_y = set.u_disp_y + (float) (rand()%10);
+	op->vel = set.vel + (float) (rand()%10);
+
 }
 
 //===========================================================================
