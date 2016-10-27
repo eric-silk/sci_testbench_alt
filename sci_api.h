@@ -44,42 +44,48 @@ extern void init_params( struct params *values);
  * Future users can implement this functionality if desired.
  */
 
-#define NULL_CMD 			0x0000 // NULL command
+// Machine Command Codes
+//------------------------------------------------
+#define ICM_START                       0b00000001
+#define ICM_STOP                        0b00000010
+#define ICM_EMERGENCY_STOP              0b00000011
+#define ICM_SET_VELOCITY                0b00000100
+#define ICM_SET_ACCELERATION            0b00000101
+#define ICM_SET_JERK                    0b00000110
 
-/******* GET commands ********/
-// Poll the MCU for the values. Not a part of regular broadcasts
-// Velocity, acceleration, jerk
-#define GET_VEL				0x01 // send current velocity
-#define GET_ACCEL			0x02 // send current acceleration
-#define GET_JERK			0x03 // send current jerk
+#define CCM_START                       0b10000001
+#define CCM_STOP                        0b10000010
+#define CCM_EMERGENCY_STOP              0b10000011
+#define CCM_SET_VELOCITY                0b10000100
+#define CCM_SET_ACCELERATION            0b10000101
+#define CCM_SET_JERK                    0b10000110
 
-// Displacements
-#define GET_L_DISP			0x04 // send current upper x & y displacement
-#define GET_U_DISP			0x05 // send current lower x & y displacement
-#define GET_ALL				0xE6 // send all values
+// Controller Command Codes
+//------------------------------------------------
+#define ICC_ERROR                       0b00100001
+#define CCC_ERROR                       0b10100001
 
-/******* SET commands ********/
-// Velocity, acceleration, jerk
-#define SET_VEL				0x59 // Define velocity setpoint
-#define SET_ACCEL 			0x2A // Define acceleration
-#define SET_JERK			0x2B // Define max change in acceleration
-#define SET_VEL_ACCEL		0x2C
-#define SET_VEL_JERK		0x2D
-#define SET_ACCEL_JERK		0x2E
-#define SET_BULK			0x6F // Set all values
+// Machine Data Codes
+//------------------------------------------------
+#define IDM_SEND_VELOCITY               0b01000001
+#define IDM_SEND_ACCELERATION           0b01000010
+#define IDM_SEND_JERK                   0b01000011
+#define IDM_SEND_LOWER_DISPLACEMENT_X   0b01000100
+#define IDM_SEND_LOWER_DISPLACEMENT_Y   0b01000101
+#define IDM_SEND_UPPER_DISPLACEMENT_X   0b01000110
+#define IDM_SEND_UPPER_DISPLACEMENT_Y   0b01000111
+#define IDM_SEND_ROTATIONAL_POSITION_X  0b01001000
+#define IDM_SEND_ROTATIONAL_POSITION_y  0b01001001
 
-/******* SEND commands ********/
-// Velocity, acceleration, jerk
-#define SEND_VEL			0x59 // Send current velocity
-#define SEND_ACCEL 			0x5A // Send current acceleration
-#define SEND_JERK			0x5B // Send curent change in acceleration
-#define SEND_L_DISP			0x5C // Send current lower displacement
-#define SEND_U_DISP			0x5D // Send current upper displacement
-#define SEND_BULK			0xFE // Set all values
-
-/************ ERRORS ***********/
-#define ERROR_FIFO_FULL		0x15 // FIFO FULL
-#define EMERGENCY			0x17 // Emergency condition
+#define CDM_SEND_VELOCITY               0b11000001
+#define CDM_SEND_ACCELERATION           0b11000010
+#define CDM_SEND_JERK                   0b11000011
+#define CDM_SEND_LOWER_DISPLACEMENT_X   0b11000100
+#define CDM_SEND_LOWER_DISPLACEMENT_Y   0b11000101
+#define CDM_SEND_UPPER_DISPLACEMENT_X   0b11000110
+#define CDM_SEND_UPPER_DISPLACEMENT_Y   0b11000111
+#define CDM_SEND_ROTATIONAL_POSITION_X  0b11001000
+#define CDM_SEND_ROTATIONAL_POSITION_y  0b11001001
 
 
 /************************************ FUNCTIONS ***********************************/

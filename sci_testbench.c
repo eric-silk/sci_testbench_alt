@@ -28,6 +28,7 @@ interrupt void sciaRxFifoIsr(void);
 __interrupt void cpu_timer0_isr(void);
 void scia_fifo_init(void);
 void error(void);
+void update_op_point(struct params *op, struct params set);
 //void scia_xmit(int a);
 //void scia_msg(char * msg);
 

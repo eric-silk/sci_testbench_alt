@@ -105,7 +105,8 @@ int e_stop(struct params *set_point){
 	return 1; //sucess
 }
 
-int send_value(char cmd, float val1, float val2){ //set val2 to NULL when xmitting one value
+int send_value(char cmd, float val1)
+{
 
 
 	return 1; //if success
@@ -162,14 +163,14 @@ int broadcast(int enable, struct params *values){
 
 	//code to check broadcast enable
 	if(enable){
-		//scia_xmit_int(SEND_BULK);
+		scia_xmit_int();
 		scia_xmit_float(values->vel);
-		/*scia_xmit_float(values->accel);
+		scia_xmit_float(values->accel);
 		scia_xmit_float(values->jerk);
 		scia_xmit_float(values->l_disp_x);
 		scia_xmit_float(values->l_disp_y);
 		scia_xmit_float(values->u_disp_x);
-		scia_xmit_float(values->u_disp_y);*/
+		scia_xmit_float(values->u_disp_y);
 		//code to check for error during transmission attempts
 		return 1;
 	}
