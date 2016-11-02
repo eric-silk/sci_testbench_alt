@@ -91,10 +91,10 @@ extern void init_params( struct params *values);
 /************************************ FUNCTIONS ***********************************/
 
 int extract_cmd(char *cmd, int *index, char *extracted);
-int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point);
-int e_stop();
+//int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point);
+int e_stop(struct params *set_point);
 
-int send_value(char cmd, float val1, float val2);
+int send_value(char IDM, float val, char CDM);
 
 // Function prototypes to set values
 int set_vel(float *vel);
@@ -110,7 +110,7 @@ int get_l_disp(float x_disp, float y_disp);
 int get_u_disp(float x_disp, float y_disp);
 
 // Function prototypes for broadcast handling
-int broadcast();
+int broadcast(int enable, struct params *values);
 int broadcast_ctrl(int enable);
 
 // Function prototypes for error sending

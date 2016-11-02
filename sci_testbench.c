@@ -122,7 +122,7 @@ void main(void)
 	init_params(&set_point);
 	init_params(&op_point);
 
-	scia_msg("\r\nReady to accept values. \r\n");
+	//scia_msg("\r\nReady to accept values. \r\n");
 
 // Step 6. IDLE loop. Just sit and loop forever (optional):
 	for(;;)
@@ -139,7 +139,7 @@ void main(void)
 			for(;RXRCV_flag > 0; RXRCV_flag--)
 			{
 
-				parse_cmd(ReceivedChar, RXRCV_flag, &set_point, &op_point);
+				//parse_cmd(ReceivedChar, RXRCV_flag, &set_point, &op_point);
 
 			}
 
@@ -188,10 +188,10 @@ void update_op_point(struct params *op, struct params set)
 {
 	op->accel = set.accel + (float) (rand()%10);
 	op->jerk = set.jerk + (float) (rand()%10);
-	op->l_disp_x = set.l_disp_x + (float) (rand()%10);
-	op->l_disp_y = set.l_disp_y + (float) (rand()%10);
-	op->u_disp_x = set.u_disp_x + (float) (rand()%10);
-	op->u_disp_y = set.u_disp_y + (float) (rand()%10);
+	op->l_disp_x = set.l_disp_x + (float) (rand()%4);
+	op->l_disp_y = set.l_disp_y + (float) (rand()%4);
+	op->u_disp_x = set.u_disp_x + (float) (rand()%4);
+	op->u_disp_y = set.u_disp_y + (float) (rand()%4);
 	op->vel = set.vel + (float) (rand()%10);
 
 }

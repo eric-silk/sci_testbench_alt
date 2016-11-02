@@ -21,7 +21,7 @@ void init_params( struct params *values)
 	values->u_disp_x = 0;
 	values->u_disp_y = 0;
 }
-
+/*
 int extract_cmd(char *cmd, int *index, char *extracted)
 {
 	//returns number of elements extracted
@@ -97,7 +97,7 @@ int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct param
 	} //end While
 	return 1;
 } // end parse_cmd()
-
+*/
 int e_stop(struct params *set_point){
 	set_point->vel = 0;
 	set_point->accel = SAFE_DECEL;
@@ -105,10 +105,12 @@ int e_stop(struct params *set_point){
 	return 1; //sucess
 }
 
-int send_value(char cmd, float val1)
+int send_value(char IDM, float val, char CDM)
 {
 
-
+	scia_xmit_char(IDM);
+	scia_xmit_float(val);
+	scia_xmit_char(CDM);
 	return 1; //if success
 }
 
@@ -131,27 +133,27 @@ int set_jerk(float *jerk){
 // Functions to get values
 int get_vel(float vel){
 	//code to obtain velocity
-	send_value(SEND_VEL, vel, NULL);
+	//send_value(SEND_VEL, vel, NULL);
 	return 1; //sucess
 }
 
 int get_accel(float accel){
-	send_value(SEND_ACCEL, accel, NULL);
+	//send_value(SEND_ACCEL, accel, NULL);
 	return 1; //sucess
 }
 
 int get_jerk(float jerk){
-	send_value(SEND_JERK, jerk, NULL);
+	//send_value(SEND_JERK, jerk, NULL);
 	return 1; //sucess
 }
 
 int get_l_disp(float l_disp_x, float l_disp_y){
-	send_value(SEND_L_DISP, l_disp_x, l_disp_y);
+	//send_value(SEND_L_DISP, l_disp_x, l_disp_y);
 	return 1; //sucess
 }
 
 int get_u_disp(float u_disp_x, float u_disp_y){
-	send_value(SEND_U_DISP, u_disp_x, u_disp_y);
+	//send_value(SEND_U_DISP, u_disp_x, u_disp_y);
 	return 1; //sucess
 }
 
@@ -163,14 +165,13 @@ int broadcast(int enable, struct params *values){
 
 	//code to check broadcast enable
 	if(enable){
-		scia_xmit_int();
-		scia_xmit_float(values->vel);
-		scia_xmit_float(values->accel);
-		scia_xmit_float(values->jerk);
-		scia_xmit_float(values->l_disp_x);
-		scia_xmit_float(values->l_disp_y);
-		scia_xmit_float(values->u_disp_x);
-		scia_xmit_float(values->u_disp_y);
+		send_value(IDM_SEND_VELOCITY, values->vel, CDM_SEND_VELOCITY);
+		send_value(IDM_SEND_ACCELERATION, values->accel, CDM_SEND_ACCELERATION);
+		send_value(IDM_SEND_JERK, values->jerk, CDM_SEND_JERK);
+		send_value(IDM_SEND_LOWER_DISPLACEMENT_X, values->l_disp_x, CDM_SEND_LOWER_DISPLACEMENT_X);
+		send_value(IDM_SEND_LOWER_DISPLACEMENT_Y, values->l_disp_y, CDM_SEND_LOWER_DISPLACEMENT_Y);
+		send_value(IDM_SEND_UPPER_DISPLACEMENT_X, values->u_disp_x, CDM_SEND_UPPER_DISPLACEMENT_X);
+		send_value(IDM_SEND_UPPER_DISPLACEMENT_Y, values->u_disp_y, CDM_SEND_UPPER_DISPLACEMENT_Y);
 		//code to check for error during transmission attempts
 		return 1;
 	}

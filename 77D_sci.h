@@ -15,7 +15,7 @@
 #define HIGH_BAUD	0
 
 void scia_fifo_init();
-void scia_xmit_int(int a);
+void scia_xmit_char(char a);
 void scia_xmit_float(float a);
 void scia_msg(char * msg);
 

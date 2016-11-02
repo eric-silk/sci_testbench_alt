@@ -54,7 +54,7 @@ void scia_fifo_init()
 
 
 // Transmit a character/int from the SCI
-void scia_xmit_int(int a)
+void scia_xmit_char(char a)
 {
     while (SciaRegs.SCIFFTX.bit.TXFFST != 0) {}
     //sends upper and then lower 8 bits
@@ -76,8 +76,9 @@ void scia_xmit_float(float a)
 	for(; i<2; i++)
 	{
 		//Workaround for C2000 not supporting 8 bit types
-		SciaRegs.SCITXBUF.all = ((temp.bytes[1-i] & 0xFF00) >> 8);
-		SciaRegs.SCITXBUF.all = (temp.bytes[1-i] & 0xFF);
+		SciaRegs.SCITXBUF.all = (temp.bytes[i] & 0xFF);
+		SciaRegs.SCITXBUF.all = ((temp.bytes[i] & 0xFF00) >> 8);
+
 	}
 }
 
@@ -88,7 +89,7 @@ void scia_msg(char * msg)
     i = 0;
     while(msg[i] != '\0')
     {
-        scia_xmit_int(msg[i]);
+        scia_xmit_char(msg[i]);
         i++;
     }
 }
