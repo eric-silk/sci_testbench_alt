@@ -165,12 +165,19 @@ int broadcast(int enable, struct params *values){
 
 	//code to check broadcast enable
 	if(enable){
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_VELOCITY, values->vel, CDM_SEND_VELOCITY);
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_ACCELERATION, values->accel, CDM_SEND_ACCELERATION);
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_JERK, values->jerk, CDM_SEND_JERK);
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_LOWER_DISPLACEMENT_X, values->l_disp_x, CDM_SEND_LOWER_DISPLACEMENT_X);
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_LOWER_DISPLACEMENT_Y, values->l_disp_y, CDM_SEND_LOWER_DISPLACEMENT_Y);
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_UPPER_DISPLACEMENT_X, values->u_disp_x, CDM_SEND_UPPER_DISPLACEMENT_X);
+		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
 		send_value(IDM_SEND_UPPER_DISPLACEMENT_Y, values->u_disp_y, CDM_SEND_UPPER_DISPLACEMENT_Y);
 		//code to check for error during transmission attempts
 		return 1;

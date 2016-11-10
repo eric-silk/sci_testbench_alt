@@ -26,7 +26,7 @@
 interrupt void sciaTxFifoIsr(void);
 interrupt void sciaRxFifoIsr(void);
 __interrupt void cpu_timer0_isr(void);
-void scia_fifo_init(void);
+//void scia_fifo_init(void);
 void error(void);
 void update_op_point(struct params *op, struct params set);
 //void scia_xmit(int a);
@@ -130,11 +130,11 @@ void main(void)
 		if(broadcast_flag == 1)
 		{
 
-			update_op_point(&op_point, set_point);
-			broadcast(broadcast_enable, &op_point);
+			//update_op_point(&op_point, set_point);
+			//broadcast(broadcast_enable, &op_point);
 			broadcast_flag = 0;
 		}
-		if(RXRCV_flag) //true for any value > 0
+		if(SciaRegs.SCIFFRX.bit.RXFFST > 3) //true for any value > 0
 		{
 			for(;RXRCV_flag > 0; RXRCV_flag--)
 			{
@@ -159,6 +159,7 @@ interrupt void sciaTxFifoIsr(void)
 
 interrupt void sciaRxFifoIsr(void)
 {
+
 	int char_cnt = SciaRegs.SCIFFRX.bit.RXFFST;
 	for(;char_cnt > 0; char_cnt--)
 	{
