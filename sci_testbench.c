@@ -33,10 +33,10 @@ void update_op_point(struct params *op, struct params set);
 //void scia_msg(char * msg);
 
 // Global variables
-int RXRCV_flag = 0;
+volatile int RXRCV_flag = 0;
 int TXRDY_flag = 0;
 int broadcast_flag = 0;
-char ReceivedChar[16];
+volatile Uint16 frame[6] = {0,0,0,0,0,0};
 
 
 void main(void)
@@ -44,7 +44,7 @@ void main(void)
 	struct params set_point;
 	struct params op_point;
 	int broadcast_enable = 1;
-	char ReceivedChar[32]; // Used for checking the received data
+	//char ReceivedChar[32]; // Used for checking the received data
 
 // Step 1. Initialize System Control:
 // PLL, WatchDog, enable Peripheral Clocks
@@ -130,20 +130,14 @@ void main(void)
 		if(broadcast_flag == 1)
 		{
 
-			//update_op_point(&op_point, set_point);
-			//broadcast(broadcast_enable, &op_point);
+			update_op_point(&op_point, set_point);
+			broadcast(broadcast_enable, &op_point);
 			broadcast_flag = 0;
 		}
-		if(SciaRegs.SCIFFRX.bit.RXFFST > 3) //true for any value > 0
+		if(RXRCV_flag == 1)
 		{
-			for(;RXRCV_flag > 0; RXRCV_flag--)
-			{
-
-				//parse_cmd(ReceivedChar, RXRCV_flag, &set_point, &op_point);
-
-			}
-
-
+			parse_cmd(frame, &op_point);
+			RXRCV_flag = 0;
 		}
 	}
 
@@ -159,14 +153,21 @@ interrupt void sciaTxFifoIsr(void)
 
 interrupt void sciaRxFifoIsr(void)
 {
+	int i = 0;
 
-	int char_cnt = SciaRegs.SCIFFRX.bit.RXFFST;
-	for(;char_cnt > 0; char_cnt--)
+	/*
+	if(SciaRegs.SCIRXBUF.bit.SCIFFFE || SciaRegs.SCIRXBUF.bit.SCIFFPE)
 	{
-		ReceivedChar[(16-char_cnt)] = SciaRegs.SCIRXBUF.all;  // Read data
+		//error handling here
+		i = 6; //to bypass frame read, put a breakpoint here as well for debugging
+	}
+	*/
+	for(; i<4;i++)
+	{
+		frame[i] = SciaRegs.SCIRXBUF.bit.SAR; //read entire frame
 	}
 
-	RXRCV_flag = char_cnt; //use to indicate number of valid elements in array
+	RXRCV_flag = 1; //set flag to indicate frame ready
 
     SciaRegs.SCIFFRX.bit.RXFFOVRCLR=1;   // Clear Overflow flag
     SciaRegs.SCIFFRX.bit.RXFFINTCLR=1;   // Clear Interrupt flag

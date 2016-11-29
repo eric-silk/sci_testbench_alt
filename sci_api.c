@@ -21,83 +21,58 @@ void init_params( struct params *values)
 	values->u_disp_x = 0;
 	values->u_disp_y = 0;
 }
-/*
-int extract_cmd(char *cmd, int *index, char *extracted)
+
+void extract_cmd(char extracted[4])
 {
-	//returns number of elements extracted
-	if(cmd[*index] == EMERGENCY)
+	int i = 0;
+	for (;i<4;i++)
 	{
-		extracted[0] = EMERGENCY;
-		(*index)++;
-		return 1;
-	}
-	else
-	{
-		extracted[0] = cmd[*index];
-		(*index)++;
-		extracted[1] = cmd[*index];
-		(*index)++;
-		return 2;
+//		extracted[i] = SciaRegs.SCIFFRX.bit.SAR & 0x0000;
 	}
 
 }
 
-int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point)
+int parse_cmd(char *extracted, struct params *op_point)
 {
-	int rslt = 0;
-	int index = 0;
-	char extracted[2];
-	while(num_elem > 0){
-		num_elem -= extract_cmd( cmd, &index, extracted);
-		switch(extracted[0])
+	//return 1 for success, 0 for failure (e.g. incorrect framing, no valid cmd frame)
+	switch(extracted[0])
 		{
-			case EMERGENCY :
-				do{
-					rslt = e_stop(*set_point);
-				} while(rslt); //repeat until e_stop sucess
+			case ICM_EMERGENCY_STOP :
+				e_stop(op_point);
 				break;
 
-			case SET_VEL:
-				set_vel(&set_point->vel);
+			case ICM_SET_VELOCITY :
+				if(extracted[3] != CCM_SET_VELOCITY)
+				{
+					return 0;
+				}
+				op_point->vel = assemble(extracted);
 				break;
 
-			case SET_ACCEL:
-				set_accel(&set_point->accel);
+			case ICM_SET_ACCELERATION :
+				if(extracted[3] != CCM_SET_ACCELERATION)
+				{
+					return 0;
+				}
+				op_point->accel = assemble(extracted);
+
 				break;
 
-			case SET_JERK:
-				set_jerk(&set_point->jerk);
-				break;
-
-			case GET_VEL:
-				get_vel(op_point->vel);
-				break;
-
-			case GET_ACCEL:
-				get_accel(op_point->accel);
-				break;
-
-			case GET_JERK:
-				get_jerk(op_point->jerk);
-				break;
-
-			case GET_L_DISP:
-				get_l_disp(op_point->l_disp_x, op_point->l_disp_y);
-				break;
-
-			case GET_U_DISP:
-				get_u_disp(op_point->u_disp_x, op_point->u_disp_y);
+			case ICM_SET_JERK:
+				if(extracted[3] != CCM_SET_JERK)
+				{
+					return 0;
+				}
+				op_point->jerk = assemble(extracted);
 				break;
 
 			default:
-				//send/display "ERROR_INVALID_CMD"
-				break;
+				return 0;
 
-		} //end switch case
-	} //end While
+		}
 	return 1;
-} // end parse_cmd()
-*/
+}
+
 int e_stop(struct params *set_point){
 	set_point->vel = 0;
 	set_point->accel = SAFE_DECEL;
@@ -112,49 +87,6 @@ int send_value(char IDM, float val, char CDM)
 	scia_xmit_float(val);
 	scia_xmit_char(CDM);
 	return 1; //if success
-}
-
-// Functions to set values
-int set_vel(float *vel){
-	// code to set vel
-	return 1; //sucess
-}
-
-int set_accel(float *accel){
-	// code to set accel
-	return 1; //sucess
-}
-
-int set_jerk(float *jerk){
-	// code to set jerk
-	return 1; //sucess
-}
-
-// Functions to get values
-int get_vel(float vel){
-	//code to obtain velocity
-	//send_value(SEND_VEL, vel, NULL);
-	return 1; //sucess
-}
-
-int get_accel(float accel){
-	//send_value(SEND_ACCEL, accel, NULL);
-	return 1; //sucess
-}
-
-int get_jerk(float jerk){
-	//send_value(SEND_JERK, jerk, NULL);
-	return 1; //sucess
-}
-
-int get_l_disp(float l_disp_x, float l_disp_y){
-	//send_value(SEND_L_DISP, l_disp_x, l_disp_y);
-	return 1; //sucess
-}
-
-int get_u_disp(float u_disp_x, float u_disp_y){
-	//send_value(SEND_U_DISP, u_disp_x, u_disp_y);
-	return 1; //sucess
 }
 
 // Functions for broadcast handling
@@ -193,4 +125,23 @@ int broadcast_ctrl(int enable){
 int send_error(Uint16 error){
 	//code to xmit an error code
 	return 1;
+}
+
+float assemble(char data[6]) //not the most efficient way of doing it but eh
+{
+	int i = 0;
+	union {
+			float value;
+			Uint16 bytes[2];
+		} temp;
+
+	temp.value = 0; //init to all 0's
+
+	for(;i<2;i++)
+	{
+		temp.bytes[i] |= data[2*i] & 0xFF;
+		temp.bytes[i] |= ((data[2*i+1] & 0xFF) >> 8);
+	}
+
+	return temp.value;
 }

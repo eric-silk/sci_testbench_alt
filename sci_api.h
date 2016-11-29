@@ -90,24 +90,11 @@ extern void init_params( struct params *values);
 
 /************************************ FUNCTIONS ***********************************/
 
-int extract_cmd(char *cmd, int *index, char *extracted);
-//int parse_cmd(char *cmd, Uint16 num_elem, struct params *set_point, struct params *op_point);
+void extract_cmd(char extracted[4]);
+int parse_cmd(char extracted[4], struct params *op_point);
 int e_stop(struct params *set_point);
 
 int send_value(char IDM, float val, char CDM);
-
-// Function prototypes to set values
-int set_vel(float *vel);
-int set_accel(float *accel);
-int set_jerk(float *jerk);
-
-// Function prototypes to get values
-int get_vel(float vel);
-int get_accel(float accel);
-int get_jerk(float jerk);
-
-int get_l_disp(float x_disp, float y_disp);
-int get_u_disp(float x_disp, float y_disp);
 
 // Function prototypes for broadcast handling
 int broadcast(int enable, struct params *values);
@@ -115,5 +102,7 @@ int broadcast_ctrl(int enable);
 
 // Function prototypes for error sending
 int send_error(Uint16 error);
+
+float assemble(char data[6]);
 
 #endif /* SCI_API_H_ */
