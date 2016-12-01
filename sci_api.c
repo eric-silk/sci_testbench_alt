@@ -42,7 +42,7 @@ int parse_cmd(char *extracted, struct params *op_point)
 				break;
 
 			case ICM_SET_VELOCITY :
-				if(extracted[3] != CCM_SET_VELOCITY)
+				if(extracted[5] != CCM_SET_VELOCITY)
 				{
 					return 0;
 				}
@@ -50,7 +50,7 @@ int parse_cmd(char *extracted, struct params *op_point)
 				break;
 
 			case ICM_SET_ACCELERATION :
-				if(extracted[3] != CCM_SET_ACCELERATION)
+				if(extracted[5] != CCM_SET_ACCELERATION)
 				{
 					return 0;
 				}
@@ -59,7 +59,7 @@ int parse_cmd(char *extracted, struct params *op_point)
 				break;
 
 			case ICM_SET_JERK:
-				if(extracted[3] != CCM_SET_JERK)
+				if(extracted[5] != CCM_SET_JERK)
 				{
 					return 0;
 				}
@@ -97,19 +97,19 @@ int broadcast(int enable, struct params *values){
 
 	//code to check broadcast enable
 	if(enable){
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_VELOCITY, values->vel, CDM_SEND_VELOCITY);
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_ACCELERATION, values->accel, CDM_SEND_ACCELERATION);
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_JERK, values->jerk, CDM_SEND_JERK);
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_LOWER_DISPLACEMENT_X, values->l_disp_x, CDM_SEND_LOWER_DISPLACEMENT_X);
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_LOWER_DISPLACEMENT_Y, values->l_disp_y, CDM_SEND_LOWER_DISPLACEMENT_Y);
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_UPPER_DISPLACEMENT_X, values->u_disp_x, CDM_SEND_UPPER_DISPLACEMENT_X);
-		while(SciaRegs.SCIFFTX.bit.TXFFST != 0);
+		while(!SciaRegs.SCICTL2.bit.TXEMPTY);
 		send_value(IDM_SEND_UPPER_DISPLACEMENT_Y, values->u_disp_y, CDM_SEND_UPPER_DISPLACEMENT_Y);
 		//code to check for error during transmission attempts
 		return 1;
@@ -127,21 +127,22 @@ int send_error(Uint16 error){
 	return 1;
 }
 
-float assemble(char data[6]) //not the most efficient way of doing it but eh
+float assemble(char data[6])
 {
 	int i = 0;
 	union {
 			float value;
-			Uint16 bytes[2];
+			Uint16 bytes[2]; //structure could likely be improved upon by limiting the number of bits per byte
 		} temp;
 
 	temp.value = 0; //init to all 0's
 
-	for(;i<2;i++)
-	{
-		temp.bytes[i] |= data[2*i] & 0xFF;
-		temp.bytes[i] |= ((data[2*i+1] & 0xFF) >> 8);
-	}
+	//unrolled the loop because its late and I didn't want to mess with array indices.
+	temp.bytes[0] |= data[1] & 0xFF;
+	temp.bytes[0] |= ((data[2] & 0xFF) << 8);
+	temp.bytes[1] |= data[3] & 0xFF;
+	temp.bytes[1] |= ((data[4] & 0xFF) << 8);
+
 
 	return temp.value;
 }

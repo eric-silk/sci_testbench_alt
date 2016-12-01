@@ -21,13 +21,13 @@ void scia_fifo_init()
 	SciaRegs.SCICTL1.bit.RXERRINTENA = 1; // Enable RX interrupts
 	SciaRegs.SCICTL2.bit.TXINTENA =1; //SCITXBUF interrupt enable
 	SciaRegs.SCICTL2.bit.RXBKINTENA =1; //Receiver-buffer/break interrupt enable
-	SciaRegs.SCIHBAUD.all = 0x0000;
-	SciaRegs.SCILBAUD.all = 0x0000;
+	SciaRegs.SCIHBAUD.all = 0x0002;
+	SciaRegs.SCILBAUD.all = 0x008B;
 	SciaRegs.SCICCR.bit.LOOPBKENA = 0; // disable loop back
 	SciaRegs.SCIFFTX.all=0xC022; //enable+rst fifo, sets TX FIFO interrupt level to 2, enables TX interrupt
 	SciaRegs.SCIFFRX.bit.RXFIFORESET = 0; //rst fifo
 	SciaRegs.SCIFFRX.all=0x0021; //set RX FIFO interrupt level to 1, enables RX interrupt
-	SciaRegs.SCIFFRX.bit.RXFFIL = 4;
+	SciaRegs.SCIFFRX.bit.RXFFIL = 6;
 	SciaRegs.SCIFFRX.bit.RXFIFORESET = 1; //release from rst
 	SciaRegs.SCIFFCT.all=0x00;
 

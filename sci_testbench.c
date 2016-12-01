@@ -36,7 +36,8 @@ void update_op_point(struct params *op, struct params set);
 volatile int RXRCV_flag = 0;
 int TXRDY_flag = 0;
 int broadcast_flag = 0;
-volatile Uint16 frame[6] = {0,0,0,0,0,0};
+//volatile Uint16 frame[6] = {0,0,0,0,0,0};
+volatile Uint16 frame[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
 void main(void)
@@ -136,7 +137,7 @@ void main(void)
 		}
 		if(RXRCV_flag == 1)
 		{
-			parse_cmd(frame, &op_point);
+			parse_cmd(frame, &set_point);
 			RXRCV_flag = 0;
 		}
 	}
@@ -153,7 +154,8 @@ interrupt void sciaTxFifoIsr(void)
 
 interrupt void sciaRxFifoIsr(void)
 {
-	int i = 0;
+	unsigned int i = 0;
+	static unsigned int cnt = 0;
 
 	/*
 	if(SciaRegs.SCIRXBUF.bit.SCIFFFE || SciaRegs.SCIRXBUF.bit.SCIFFPE)
@@ -162,12 +164,20 @@ interrupt void sciaRxFifoIsr(void)
 		i = 6; //to bypass frame read, put a breakpoint here as well for debugging
 	}
 	*/
-	for(; i<4;i++)
+	/*
+	for(; i<6;i++)
 	{
 		frame[i] = SciaRegs.SCIRXBUF.bit.SAR; //read entire frame
 	}
-
+	*/
+	while(SciaRegs.SCIFFRX.bit.RXFFST > 0)
+	{
+		frame[i] = SciaRegs.SCIRXBUF.bit.SAR; //read entire frame
+		i++;
+	}
+	//frame[i] = SciaRegs.SCIRXBUF.bit.SAR; //read last extra frame?
 	RXRCV_flag = 1; //set flag to indicate frame ready
+	cnt++;
 
     SciaRegs.SCIFFRX.bit.RXFFOVRCLR=1;   // Clear Overflow flag
     SciaRegs.SCIFFRX.bit.RXFFINTCLR=1;   // Clear Interrupt flag
@@ -188,13 +198,27 @@ __interrupt void cpu_timer0_isr(void){
 
 void update_op_point(struct params *op, struct params set)
 {
-	op->accel = set.accel + (float) (rand()%10);
-	op->jerk = set.jerk + (float) (rand()%10);
-	op->l_disp_x = set.l_disp_x + (float) (rand()%4);
-	op->l_disp_y = set.l_disp_y + (float) (rand()%4);
-	op->u_disp_x = set.u_disp_x + (float) (rand()%4);
-	op->u_disp_y = set.u_disp_y + (float) (rand()%4);
-	op->vel = set.vel + (float) (rand()%10);
+	if(op->vel<1000)
+	{
+		op->accel += 1;
+		op->jerk += 1;
+		op->l_disp_x += 1;
+		op->l_disp_y += 1;
+		op->u_disp_x += 1;
+		op->u_disp_y += 1;
+		op->vel += 1;
+	}
+	else
+	{
+		op->accel -= 1;
+		op->jerk -= 1;
+		op->l_disp_x -= 1;
+		op->l_disp_y -= 1;
+		op->u_disp_x -= 1;
+		op->u_disp_y -= 1;
+		op->vel -= 1;
+	}
+
 
 }
 
