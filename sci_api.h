@@ -11,7 +11,17 @@
 #ifndef SCI_API_H_
 #define SCI_API_H_
 
-// structure to hold operating params, use for setpoints and current values
+/** Parameter structure
+ *  Contains all relevant parameters for Flywheel operation. Currently there should be
+ *  two instances of this structure: operating point and set point. You should limit
+ *  your code to only ever update the set point when commanded to by the GUI. The
+ *  operating point should update whenever you have new information about flywheel
+ *  operation.
+ *
+ *  The set point will assume all values except velocity are to be maximum values --
+ *  velocity is assumed to be the desired velocity. If it is desired to allow for a max
+ *  and a target value, this structure and all related functions will need to be updated.
+ */
 struct params {
 	float vel;
 	float accel;
@@ -22,8 +32,9 @@ struct params {
 	float u_disp_y;
 };
 
-/*  E-STOP LIMITS
- * 	Sets the safe decel/jerk values for an emergency stop
+/** E-STOP LIMITS
+ * 	Sets the safe decel/jerk values for an emergency stop. Must be determined at compile
+ * 	time. More secure but less flexible this way.
  */
 #define SAFE_DECEL 10; //dummy values, adjust later
 #define SAFE_JERK  1;
@@ -31,17 +42,16 @@ struct params {
 // Function prototype to init op and setpoint param structs -- sets all elements to 0
 extern void init_params( struct params *values);
 
-// Bulk packets will always be sent in the order of the definiton of the macros
-// E.g. |SEND_BULK|VEL|ACCEL|JERK|L_DISP_X|L_DISP_Y|U_DISP_X|U_DISP_Y|
-
-/********************************* COMMAND MACROS *********************************/
-
-/* NOTE!
- * Current API assumes NNN == 001
- * This current instance does NOT support multiple values being sent
- * e.g.: cmd = 0xF9 (SEND_VEL with NNN = 0b111) will not happen
- * 		 cmd = 0x59 (SEND_VEL with NNN = 0b001) can happen
- * Future users can implement this functionality if desired.
+/** COMMAND MACROS
+ *
+ *  Bulk packets will always be sent in the order of the definiton of the macros
+ *  E.g. |SEND_BULK|VEL|ACCEL|JERK|L_DISP_X|L_DISP_Y|U_DISP_X|U_DISP_Y|
+ *
+ *  All packets must be 6 bytes in length. Where data is not needed, stuff with
+ *  dummy bytes.
+ *
+ *  See the related API documentation for further information.
+ *
  */
 
 // Machine Command Codes
@@ -88,7 +98,7 @@ extern void init_params( struct params *values);
 #define CDM_SEND_ROTATIONAL_POSITION_y  0b11001001
 
 
-/************************************ FUNCTIONS ***********************************/
+// FUNCTIONS
 
 void extract_cmd(char extracted[4]);
 int parse_cmd(char extracted[4], struct params *op_point);
@@ -96,11 +106,9 @@ int e_stop(struct params *set_point);
 
 int send_value(char IDM, float val, char CDM);
 
-// Function prototypes for broadcast handling
-int broadcast(int enable, struct params *values);
+int broadcast(int enable, struct params values);
 int broadcast_ctrl(int enable);
 
-// Function prototypes for error sending
 int send_error(Uint16 error);
 
 float assemble(char data[6]);

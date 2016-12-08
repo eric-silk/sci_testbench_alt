@@ -11,8 +11,21 @@
 //#ifndef 77D_SCI_H_
 //#define 77D_SCI_H_
 
-//Set to 1 to set baud rate to 3.125Mbps, set to 0 for 9.6kbps
-#define HIGH_BAUD	0
+/** Select one of two baud rates
+ *
+ *  HIGH_BAUD, if defined, will set the baud rate to 3.125M. Otherwise it
+ *  will be set to 9600. If you need to regularly update this, consider
+ *  adding multiple macros to set the baud rate here, and then initialize
+ *  the FIFO's accordingly.
+ *
+ *  Alternatively, implement an autobaud sequence -- I belive this will limit
+ *  the maximum baud rate to 500k. Probably not needed.
+ */
+#define HIGH_BAUD
+
+#ifndef HIGH_BAUD
+	#define LOW_BAUD
+#endif
 
 void scia_fifo_init();
 void scia_xmit_char(char a);
