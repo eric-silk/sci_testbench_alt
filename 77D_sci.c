@@ -1,5 +1,8 @@
-/*
- * 77D_sci.c
+/** Serial Communications functions.
+ *  77D_sci.c
+ *
+ *  This file contains the functions that act as an interface between the
+ *  API and the hardware, as well as the initialization of the hardware.
  *
  *  Created on: Apr 27, 2016
  *      Author: Eric

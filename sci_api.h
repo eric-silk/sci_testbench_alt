@@ -1,5 +1,8 @@
-/*
- * spi.api.h
+/** API Prototypes and Macros
+ *  spi.api.h
+ *
+ *  These macros define the various codes used in the API, along with
+ *  defining the expected control paramater structure.
  *
  *  Created on: Apr 12, 2016
  *      Author: Eric

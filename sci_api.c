@@ -1,5 +1,8 @@
-/*
- * sci_api.c
+/** API Function Calls.
+ *  sci_api.c
+ *
+ *  These functions implement the desired reception, transmission, encoding, and
+ *  decoding of packets described in the Flywheel API.
  *
  *  Created on: Apr 12, 2016
  *      Author: Eric

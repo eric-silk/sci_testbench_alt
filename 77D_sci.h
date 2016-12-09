@@ -1,5 +1,8 @@
-/*
- * 77D_sci.h
+/** Serial Communications function prototypes and macros.
+ *  77D_sci.h
+ *
+ *  This file contains the prototypes used in the serial communications,
+ *  as well as a configuration option that could be expanded upon.
  *
  *  Created on: Apr 27, 2016
  *      Author: Eric
