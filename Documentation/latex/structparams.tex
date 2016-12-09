@@ -1,0 +1,45 @@
+\hypertarget{structparams}{}\section{params Struct Reference}
+\label{structparams}\index{params@{params}}
+
+
+Parameter structure Contains all relevant parameters for Flywheel operation. Currently there should be two instances of this structure\+: operating point and set point. You should limit your code to only ever update the set point when commanded to by the G\+UI. The operating point should update whenever you have new information about flywheel operation.  
+
+
+
+
+{\ttfamily \#include $<$sci\+\_\+api.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structparams_afc29fb7fadd39a1bc2e3c52532248689}{}\label{structparams_afc29fb7fadd39a1bc2e3c52532248689} 
+float {\bfseries vel}
+\item 
+\hypertarget{structparams_a38251dfec99a8ff5f13f10c6c7217921}{}\label{structparams_a38251dfec99a8ff5f13f10c6c7217921} 
+float {\bfseries accel}
+\item 
+\hypertarget{structparams_ad12385a16c1e70621af252dc46ddd611}{}\label{structparams_ad12385a16c1e70621af252dc46ddd611} 
+float {\bfseries jerk}
+\item 
+\hypertarget{structparams_af21c3a60511601343a932892b2bd2aa9}{}\label{structparams_af21c3a60511601343a932892b2bd2aa9} 
+float {\bfseries l\+\_\+disp\+\_\+x}
+\item 
+\hypertarget{structparams_a1f347938db365ee9a0c134aac67ba3a0}{}\label{structparams_a1f347938db365ee9a0c134aac67ba3a0} 
+float {\bfseries l\+\_\+disp\+\_\+y}
+\item 
+\hypertarget{structparams_a6db4325e4ce3b14554f6b8a22fb991bb}{}\label{structparams_a6db4325e4ce3b14554f6b8a22fb991bb} 
+float {\bfseries u\+\_\+disp\+\_\+x}
+\item 
+\hypertarget{structparams_a7cac915dc0f140b664b56ef049ee880f}{}\label{structparams_a7cac915dc0f140b664b56ef049ee880f} 
+float {\bfseries u\+\_\+disp\+\_\+y}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Parameter structure Contains all relevant parameters for Flywheel operation. Currently there should be two instances of this structure\+: operating point and set point. You should limit your code to only ever update the set point when commanded to by the G\+UI. The operating point should update whenever you have new information about flywheel operation. 
+
+The set point will assume all values except velocity are to be maximum values -- velocity is assumed to be the desired velocity. If it is desired to allow for a max and a target value, this structure and all related functions will need to be updated. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/\hyperlink{sci__api_8h}{sci\+\_\+api.\+h}\end{DoxyCompactItemize}

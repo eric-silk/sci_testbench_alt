@@ -1,18 +1,19 @@
-/** API Function Calls.
- *  sci_api.c
+/**
+ *  @brief API Function Calls.
+ *  @file sci_api.c
  *
  *  These functions implement the desired reception, transmission, encoding, and
  *  decoding of packets described in the Flywheel API.
  *
- *  Created on: Apr 12, 2016
- *      Author: Eric
+ *  @date 8 Dec 2016
+ *  @author Eric Silk
  */
 
 #include "sci_api.h"
 #include "77D_sci.h"
 
 /**
- * init_params() accepts a pointer to a params struct and sets all values to 0.
+ * @brief Accepts a pointer to a params struct and sets all values to 0.
  * Change as needed to set to the desired default values. 0 seemed like a safe bet.
  */
 
@@ -30,7 +31,8 @@ void init_params( struct params *values)
 	values->u_disp_y = 0;
 }
 
-/** Not currently in use.
+/**
+ * @brief Not currently in use.
  *  Was meant to extract the data from a packet, see assemble() for current solution.
  */
 void extract_cmd(char extracted[4])
@@ -43,7 +45,8 @@ void extract_cmd(char extracted[4])
 
 }
 
-/** Parses packet and updates operating point.
+/**
+ *  @brief Parses packet and updates operating point.
  *  Pass a pointer to the current command packet and a pointer to the set point struct.
  *  Uses assemble() to extract the data and assign it to the relevant value.
  */
@@ -88,7 +91,8 @@ int parse_cmd(char *extracted, struct params *set_point)
 	return 1;
 }
 
-/** Initiate an emergency stop.
+/**
+ * @brief Initiate an emergency stop.
  *  Upon receipt of an emergency stop, set the set point velocity to 0 and the acceleration and jerk to their maximum safe value.
  *  These safe values are defined in sci_api.h and must currently be configured at compile time.
  *
@@ -107,7 +111,8 @@ int e_stop(struct params *set_point){
 	return 1; //sucess
 }
 
-/** Sends a packet to the GUI
+/**
+ * @brief Sends a packet to the GUI
  *  Accepts the IDM, value, and CDM.
  *  In the event the transmission protocol changes (e.g. USB, Ethernet), this will need to be updated.
  *
@@ -123,7 +128,8 @@ int send_value(char IDM, float val, char CDM)
 	return 1; //if success
 }
 
-/** Broadcasts current operating point information
+/**
+ * @brief Broadcasts current operating point information
  *  Currently accepts and enable value that isn't in use and the operating point structure.
  *
  *  Currently very slow. It must wait until the lasat packet is fully transmitted before sending the next, and must
@@ -161,7 +167,8 @@ int broadcast(int enable, struct params values){
 	return 0;
 }
 
-/** Not currently in use.
+/**
+ * @brief Not currently in use.
  *  Was to enable/disable broadcasting of data.
  */
 int broadcast_ctrl(int enable){
@@ -169,7 +176,8 @@ int broadcast_ctrl(int enable){
 	return 1;
 }
 
-/** Not currently in use
+/**
+ * @brief Not currently in use
  *  If an error code is needed, send it here. Should probably just call send_value() with the error code.
  */
 int send_error(Uint16 error){
@@ -177,7 +185,8 @@ int send_error(Uint16 error){
 	return 1;
 }
 
-/** Convert packet to a float
+/**
+ * @brief Convert packet to a float
  *  Accepts the 6 element data packet and extracts the 4 data bytes
  *  Assembles those bytes into a float value through the use of a union.
  *  Probably could be improved stylistically through the use of bitfields.

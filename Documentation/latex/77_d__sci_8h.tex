@@ -1,0 +1,104 @@
+\hypertarget{77_d__sci_8h}{}\section{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/77\+D\+\_\+sci.h File Reference}
+\label{77_d__sci_8h}\index{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/77\+D\+\_\+sci.\+h@{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/77\+D\+\_\+sci.\+h}}
+
+
+Serial Communications function prototypes and macros.  
+
+
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{77_d__sci_8h_a1e439b26e4ef6f47190989c530ea6cd8}{H\+I\+G\+H\+\_\+\+B\+A\+UD}
+\begin{DoxyCompactList}\small\item\em Select one of two baud rates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{77_d__sci_8h_a3188916eef8d48e2de63fe98561da32b}{scia\+\_\+fifo\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Initializes the S\+CI and F\+I\+FO\textquotesingle{}s. \end{DoxyCompactList}\item 
+void \hyperlink{77_d__sci_8h_ac346cbd6f9e6ce3619ce37862439cbef}{scia\+\_\+xmit\+\_\+char} (char a)
+\begin{DoxyCompactList}\small\item\em Transmit a character from the S\+CI. \end{DoxyCompactList}\item 
+void \hyperlink{77_d__sci_8h_a4372cd7635dfa9e44b31b860cd8b6474}{scia\+\_\+xmit\+\_\+float} (float a)
+\begin{DoxyCompactList}\small\item\em Split and transmit a float over 4 bytes The F\+I\+FO\textquotesingle{}s only accept 8 bit values. To send floats, they must be accessed 8 bits at a time. A possible improvement would be to use bitfields. \end{DoxyCompactList}\item 
+void \hyperlink{77_d__sci_8h_afb46b2973bd60b4a605f92449f3c5271}{scia\+\_\+msg} (char $\ast$msg)
+\begin{DoxyCompactList}\small\item\em Transmit a string from the S\+CI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Serial Communications function prototypes and macros. 
+
+This file contains the prototypes used in the serial communications, as well as a configuration option that could be expanded upon.
+
+\begin{DoxyDate}{Date}
+Dec 8 2016 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Eric Silk \begin{DoxyVerb}Device Specific definitions for SCI communications.\end{DoxyVerb}
+
+\end{DoxyAuthor}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{77_d__sci_8h_a1e439b26e4ef6f47190989c530ea6cd8}{}\label{77_d__sci_8h_a1e439b26e4ef6f47190989c530ea6cd8} 
+\index{77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}!H\+I\+G\+H\+\_\+\+B\+A\+UD@{H\+I\+G\+H\+\_\+\+B\+A\+UD}}
+\index{H\+I\+G\+H\+\_\+\+B\+A\+UD@{H\+I\+G\+H\+\_\+\+B\+A\+UD}!77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}}
+\subsubsection{\texorpdfstring{H\+I\+G\+H\+\_\+\+B\+A\+UD}{HIGH\_BAUD}}
+{\footnotesize\ttfamily \#define H\+I\+G\+H\+\_\+\+B\+A\+UD}
+
+
+
+Select one of two baud rates. 
+
+H\+I\+G\+H\+\_\+\+B\+A\+UD, if defined, will set the baud rate to 3.\+125M. Otherwise it will be set to 9600. If you need to regularly update this, consider adding multiple macros to set the baud rate here, and then initialize the F\+I\+FO\textquotesingle{}s accordingly.
+
+Alternatively, implement an autobaud sequence -- I belive this will limit the maximum baud rate to 500k. Probably not needed. 
+
+\subsection{Function Documentation}
+\hypertarget{77_d__sci_8h_a3188916eef8d48e2de63fe98561da32b}{}\label{77_d__sci_8h_a3188916eef8d48e2de63fe98561da32b} 
+\index{77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}!scia\+\_\+fifo\+\_\+init@{scia\+\_\+fifo\+\_\+init}}
+\index{scia\+\_\+fifo\+\_\+init@{scia\+\_\+fifo\+\_\+init}!77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}}
+\subsubsection{\texorpdfstring{scia\+\_\+fifo\+\_\+init()}{scia\_fifo\_init()}}
+{\footnotesize\ttfamily void scia\+\_\+fifo\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the S\+CI and F\+I\+FO\textquotesingle{}s. 
+
+Current version is the \char`\"{}verbose\char`\"{} initialization that should help alleviate the burden of reading some technical documentation to get this to run.
+
+You should still read the relevant sections of the technical reference manual.
+
+No, seriously -- its important. 99\% of questions can be answered in it or the errata.
+
+In the event that the verbose version gives you issues, comment it out and use the currently commented init sequence, it is more tested and should work.
+
+The choice between a 3.\+125M and 9600 baud is set in the header file. Comment out the H\+I\+G\+H\+\_\+\+B\+A\+UD declaration to switch to 9600 baud, or set your own custom baud rate by setting the appropriate registers as per the technical reference manual. \hypertarget{77_d__sci_8h_afb46b2973bd60b4a605f92449f3c5271}{}\label{77_d__sci_8h_afb46b2973bd60b4a605f92449f3c5271} 
+\index{77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}!scia\+\_\+msg@{scia\+\_\+msg}}
+\index{scia\+\_\+msg@{scia\+\_\+msg}!77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}}
+\subsubsection{\texorpdfstring{scia\+\_\+msg()}{scia\_msg()}}
+{\footnotesize\ttfamily void scia\+\_\+msg (\begin{DoxyParamCaption}\item[{char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+Transmit a string from the S\+CI. 
+
+Accepts the pointer to a C-\/string (fyi don\textquotesingle{}t Google that without safe search). Transmits the entire string, expects a terminating N\+U\+LL character. Currently slow and blocking, could be improved using an interrupt structure and a software F\+SM. \hypertarget{77_d__sci_8h_ac346cbd6f9e6ce3619ce37862439cbef}{}\label{77_d__sci_8h_ac346cbd6f9e6ce3619ce37862439cbef} 
+\index{77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}!scia\+\_\+xmit\+\_\+char@{scia\+\_\+xmit\+\_\+char}}
+\index{scia\+\_\+xmit\+\_\+char@{scia\+\_\+xmit\+\_\+char}!77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}}
+\subsubsection{\texorpdfstring{scia\+\_\+xmit\+\_\+char()}{scia\_xmit\_char()}}
+{\footnotesize\ttfamily void scia\+\_\+xmit\+\_\+char (\begin{DoxyParamCaption}\item[{char}]{a }\end{DoxyParamCaption})}
+
+
+
+Transmit a character from the S\+CI. 
+
+Currently waits for the TX F\+I\+FO to be empty to ensure no clobbering occurs. Remove the while() loop if calling from an interrupt and/or to improve throughput if needed (or at least check that the F\+I\+FO isn\textquotesingle{}t full). \hypertarget{77_d__sci_8h_a4372cd7635dfa9e44b31b860cd8b6474}{}\label{77_d__sci_8h_a4372cd7635dfa9e44b31b860cd8b6474} 
+\index{77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}!scia\+\_\+xmit\+\_\+float@{scia\+\_\+xmit\+\_\+float}}
+\index{scia\+\_\+xmit\+\_\+float@{scia\+\_\+xmit\+\_\+float}!77\+D\+\_\+sci.\+h@{77\+D\+\_\+sci.\+h}}
+\subsubsection{\texorpdfstring{scia\+\_\+xmit\+\_\+float()}{scia\_xmit\_float()}}
+{\footnotesize\ttfamily void scia\+\_\+xmit\+\_\+float (\begin{DoxyParamCaption}\item[{float}]{a }\end{DoxyParamCaption})}
+
+
+
+Split and transmit a float over 4 bytes The F\+I\+FO\textquotesingle{}s only accept 8 bit values. To send floats, they must be accessed 8 bits at a time. A possible improvement would be to use bitfields. 
+
+Please also note that C2000 processors have a minimum data size of 2 bytes. Even char\textquotesingle{}s are 16 bits. This can cause undesirable behavior if not accounted for. 

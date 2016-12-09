@@ -1,0 +1,87 @@
+\hypertarget{sci__api_8c}{}\section{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/sci\+\_\+api.c File Reference}
+\label{sci__api_8c}\index{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/sci\+\_\+api.\+c@{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/sci\+\_\+api.\+c}}
+
+
+A\+PI Function Calls.  
+
+
+{\ttfamily \#include \char`\"{}sci\+\_\+api.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}77\+D\+\_\+sci.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{sci__api_8c_ac208f7e7c011ec887ca3ec03b241941f}{}\label{sci__api_8c_ac208f7e7c011ec887ca3ec03b241941f} 
+void \hyperlink{sci__api_8c_ac208f7e7c011ec887ca3ec03b241941f}{init\+\_\+params} (struct \hyperlink{structparams}{params} $\ast$values)
+\begin{DoxyCompactList}\small\item\em Accepts a pointer to a params struct and sets all values to 0. Change as needed to set to the desired default values. 0 seemed like a safe bet. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8c_a73760ed076a8b339bbe017196373d71d}{}\label{sci__api_8c_a73760ed076a8b339bbe017196373d71d} 
+void \hyperlink{sci__api_8c_a73760ed076a8b339bbe017196373d71d}{extract\+\_\+cmd} (char extracted\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Not currently in use. Was meant to extract the data from a packet, see \hyperlink{sci__api_8c_a17115cd37a42375bb9b191e4db34aa43}{assemble()} for current solution. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8c_aaef3768b23b03ec91379590828051b6d}{}\label{sci__api_8c_aaef3768b23b03ec91379590828051b6d} 
+int \hyperlink{sci__api_8c_aaef3768b23b03ec91379590828051b6d}{parse\+\_\+cmd} (char $\ast$extracted, struct \hyperlink{structparams}{params} $\ast$set\+\_\+point)
+\begin{DoxyCompactList}\small\item\em Parses packet and updates operating point. Pass a pointer to the current command packet and a pointer to the set point struct. Uses \hyperlink{sci__api_8c_a17115cd37a42375bb9b191e4db34aa43}{assemble()} to extract the data and assign it to the relevant value. \end{DoxyCompactList}\item 
+int \hyperlink{sci__api_8c_ae9832bac010cccef92f1ebb6755f6ffa}{e\+\_\+stop} (struct \hyperlink{structparams}{params} $\ast$set\+\_\+point)
+\begin{DoxyCompactList}\small\item\em Initiate an emergency stop. Upon receipt of an emergency stop, set the set point velocity to 0 and the acceleration and jerk to their maximum safe value. These safe values are defined in \hyperlink{sci__api_8h}{sci\+\_\+api.\+h} and must currently be configured at compile time. \end{DoxyCompactList}\item 
+int \hyperlink{sci__api_8c_a627f6bcfacca0e2fc1eef64883c69c3e}{send\+\_\+value} (char I\+DM, float val, char C\+DM)
+\begin{DoxyCompactList}\small\item\em Sends a packet to the G\+UI Accepts the I\+DM, value, and C\+DM. In the event the transmission protocol changes (e.\+g. U\+SB, Ethernet), this will need to be updated. \end{DoxyCompactList}\item 
+int \hyperlink{sci__api_8c_a3b8965bce76bcbcd9726e7ef30ea4636}{broadcast} (int enable, struct \hyperlink{structparams}{params} values)
+\begin{DoxyCompactList}\small\item\em Broadcasts current operating point information Currently accepts and enable value that isn\textquotesingle{}t in use and the operating point structure. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8c_a1aa642c19a64bcbfdd89d0903360640b}{}\label{sci__api_8c_a1aa642c19a64bcbfdd89d0903360640b} 
+int \hyperlink{sci__api_8c_a1aa642c19a64bcbfdd89d0903360640b}{broadcast\+\_\+ctrl} (int enable)
+\begin{DoxyCompactList}\small\item\em Not currently in use. Was to enable/disable broadcasting of data. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8c_aba7de291e35b3d2be08582b1f6f0a961}{}\label{sci__api_8c_aba7de291e35b3d2be08582b1f6f0a961} 
+int \hyperlink{sci__api_8c_aba7de291e35b3d2be08582b1f6f0a961}{send\+\_\+error} (Uint16 error)
+\begin{DoxyCompactList}\small\item\em Not currently in use If an error code is needed, send it here. Should probably just call \hyperlink{sci__api_8c_a627f6bcfacca0e2fc1eef64883c69c3e}{send\+\_\+value()} with the error code. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8c_a17115cd37a42375bb9b191e4db34aa43}{}\label{sci__api_8c_a17115cd37a42375bb9b191e4db34aa43} 
+float \hyperlink{sci__api_8c_a17115cd37a42375bb9b191e4db34aa43}{assemble} (char data\mbox{[}6\mbox{]})
+\begin{DoxyCompactList}\small\item\em Convert packet to a float Accepts the 6 element data packet and extracts the 4 data bytes Assembles those bytes into a float value through the use of a union. Probably could be improved stylistically through the use of bitfields. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A\+PI Function Calls. 
+
+These functions implement the desired reception, transmission, encoding, and decoding of packets described in the Flywheel A\+PI.
+
+\begin{DoxyDate}{Date}
+8 Dec 2016 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Eric Silk 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\hypertarget{sci__api_8c_a3b8965bce76bcbcd9726e7ef30ea4636}{}\label{sci__api_8c_a3b8965bce76bcbcd9726e7ef30ea4636} 
+\index{sci\+\_\+api.\+c@{sci\+\_\+api.\+c}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!sci\+\_\+api.\+c@{sci\+\_\+api.\+c}}
+\subsubsection{\texorpdfstring{broadcast()}{broadcast()}}
+{\footnotesize\ttfamily int broadcast (\begin{DoxyParamCaption}\item[{int}]{enable,  }\item[{struct \hyperlink{structparams}{params}}]{values }\end{DoxyParamCaption})}
+
+
+
+Broadcasts current operating point information Currently accepts and enable value that isn\textquotesingle{}t in use and the operating point structure. 
+
+Currently very slow. It must wait until the lasat packet is fully transmitted before sending the next, and must transmit all packets before returning. Consider using the S\+C\+IA TX interrupt and developing an I\+SR for less time in the function and greater throughput. For instance, set the interrupt to fire anytime there are fewer than 8 elements in the F\+I\+FO and stuff the next packet in before returning. Use a software F\+SM to track the next packet that needs transmission (preferably using an enumerated type to restrict behavior).
+
+Google it if you don\textquotesingle{}t know what I\textquotesingle{}m talking about. \hypertarget{sci__api_8c_ae9832bac010cccef92f1ebb6755f6ffa}{}\label{sci__api_8c_ae9832bac010cccef92f1ebb6755f6ffa} 
+\index{sci\+\_\+api.\+c@{sci\+\_\+api.\+c}!e\+\_\+stop@{e\+\_\+stop}}
+\index{e\+\_\+stop@{e\+\_\+stop}!sci\+\_\+api.\+c@{sci\+\_\+api.\+c}}
+\subsubsection{\texorpdfstring{e\+\_\+stop()}{e\_stop()}}
+{\footnotesize\ttfamily int e\+\_\+stop (\begin{DoxyParamCaption}\item[{struct \hyperlink{structparams}{params} $\ast$}]{set\+\_\+point }\end{DoxyParamCaption})}
+
+
+
+Initiate an emergency stop. Upon receipt of an emergency stop, set the set point velocity to 0 and the acceleration and jerk to their maximum safe value. These safe values are defined in \hyperlink{sci__api_8h}{sci\+\_\+api.\+h} and must currently be configured at compile time. 
+
+The G\+UI expects an A\+CK, so it also sends the relevant code up.
+
+Possible improvements would be accepting S\+A\+F\+E\+\_\+\+D\+E\+C\+EL and S\+A\+F\+E\+\_\+\+J\+E\+RK arguments so that the operator can set those, but this could lead to undesirable behavior during operation. Additionally, some form of error checking if needed and an appropriate return value as needed. \hypertarget{sci__api_8c_a627f6bcfacca0e2fc1eef64883c69c3e}{}\label{sci__api_8c_a627f6bcfacca0e2fc1eef64883c69c3e} 
+\index{sci\+\_\+api.\+c@{sci\+\_\+api.\+c}!send\+\_\+value@{send\+\_\+value}}
+\index{send\+\_\+value@{send\+\_\+value}!sci\+\_\+api.\+c@{sci\+\_\+api.\+c}}
+\subsubsection{\texorpdfstring{send\+\_\+value()}{send\_value()}}
+{\footnotesize\ttfamily int send\+\_\+value (\begin{DoxyParamCaption}\item[{char}]{I\+DM,  }\item[{float}]{val,  }\item[{char}]{C\+DM }\end{DoxyParamCaption})}
+
+
+
+Sends a packet to the G\+UI Accepts the I\+DM, value, and C\+DM. In the event the transmission protocol changes (e.\+g. U\+SB, Ethernet), this will need to be updated. 
+
+Possible improvements would be checking the I\+D\+M/\+C\+DM pair or only accepting one and filling in the other, and enforcing some form of error checking with an appropriate return value. 

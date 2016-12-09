@@ -1,11 +1,12 @@
-/** API Prototypes and Macros
- *  spi.api.h
+/**
+ *  @brief API Prototypes and Macros
+ *  @file sci_api.h
  *
  *  These macros define the various codes used in the API, along with
  *  defining the expected control paramater structure.
  *
- *  Created on: Apr 12, 2016
- *      Author: Eric
+ *  @date 8 Dec 2016
+ *  @author Eric Silk
  */
 
 
@@ -14,7 +15,8 @@
 #ifndef SCI_API_H_
 #define SCI_API_H_
 
-/** Parameter structure
+/**
+ * @brief Parameter structure
  *  Contains all relevant parameters for Flywheel operation. Currently there should be
  *  two instances of this structure: operating point and set point. You should limit
  *  your code to only ever update the set point when commanded to by the GUI. The
@@ -35,17 +37,26 @@ struct params {
 	float u_disp_y;
 };
 
-/** E-STOP LIMITS
+/**
+ * @defgroup e_macros E-Stop Macros
+ * @brief E-STOP LIMITS
  * 	Sets the safe decel/jerk values for an emergency stop. Must be determined at compile
  * 	time. More secure but less flexible this way.
+ * 	\addtogroup e_macros
+ * 	@{
  */
 #define SAFE_DECEL 10; //dummy values, adjust later
 #define SAFE_JERK  1;
+/** @} */
+
 
 // Function prototype to init op and setpoint param structs -- sets all elements to 0
 extern void init_params( struct params *values);
 
-/** COMMAND MACROS
+
+/*!
+ *  @defgroup cmd_macros Command Macros
+ *  @brief COMMAND MACROS
  *
  *  Bulk packets will always be sent in the order of the definiton of the macros
  *  E.g. |SEND_BULK|VEL|ACCEL|JERK|L_DISP_X|L_DISP_Y|U_DISP_X|U_DISP_Y|
@@ -54,7 +65,8 @@ extern void init_params( struct params *values);
  *  dummy bytes.
  *
  *  See the related API documentation for further information.
- *
+ *  \addtogroup cmd_macros
+ *  @{
  */
 
 // Machine Command Codes
@@ -99,7 +111,7 @@ extern void init_params( struct params *values);
 #define CDM_SEND_UPPER_DISPLACEMENT_Y   0b11000111
 #define CDM_SEND_ROTATIONAL_POSITION_X  0b11001000
 #define CDM_SEND_ROTATIONAL_POSITION_y  0b11001001
-
+//@}
 
 // FUNCTIONS
 

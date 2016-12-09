@@ -1,9 +1,9 @@
 /*****************************************************************************
- * File: sci_testbench.c
- * Author: Eric Silk (silk2390@vandals.uidaho.edu)
- * Revision date: December 7, 2016
+ * @File: sci_testbench.c
+ * @Author: Eric Silk (silk2390@vandals.uidaho.edu)
+ * @date: December 7, 2016
  * MCU: TI Delfino TMS320F28377D
- * Developed for the FlyCAM project in conjunction with the FESS team at
+ * @brief Developed for the FlyCAM project in conjunction with the FESS team at
  * the University of Idaho.
  * Used as a testbench for serial communication with a GUI running on a
  * seperate PC. Will ultimately support an API to parse commands from the
@@ -21,7 +21,8 @@
 #include "sci_api.h"
 #include <stdlib.h>
 
-/** Prototype statements for functions found within this file.
+/**
+ * @brief Prototype statements for functions found within this file.
  *
  *  Please attempt to modularize your code whenever possible.
  *  When possible/reasonable, move all functions to external files
@@ -32,7 +33,8 @@ interrupt void sciaRxFifoIsr(void);
 __interrupt void cpu_timer0_isr(void);
 void update_op_point(struct params *op, struct params set);
 
-/** Global variables.
+/**
+ * @brief Global variables.
  *
  *  Use only for flags and to pass data to and from ISR's.
  *  You're not Mech E's, don't code like them.
@@ -49,7 +51,8 @@ void main(void)
 	struct params op_point;
 	int broadcast_enable = 1; //not really used, just in place in the event broadcast enable/disable was implemented.
 
-/** MCU Initilization.
+/**
+ * @MCU Initilization.
  *
  *  Boilerplate inits for the 77D. Gets the required clocks and peripherals up and running.
  *  The comments should explain most everything. Look at other examples in ControlSuite
@@ -153,7 +156,8 @@ void main(void)
 
 }
 
-/** TX FIFO ISR.
+/**
+ * @brief TX FIFO ISR.
  *  Currently unused and disabled. Add desired behavior and enable
  *  if needed.
  *
@@ -172,7 +176,8 @@ interrupt void sciaTxFifoIsr(void)
 	PieCtrlRegs.PIEACK.all|=PIEACK_GROUP9;      // Issue PIE ACK
 }
 
-/** RX FIFO ISR.
+/**
+ * @brief RX FIFO ISR.
  *  Currently should check for errors (overflow or parity) and
  *  take some action (none implemented here).
  *
@@ -205,7 +210,8 @@ interrupt void sciaRxFifoIsr(void)
 }
 
 
-/** Timer interrupt.
+/**
+ * @brief Timer interrupt.
  *  Enables broadcast flag once every second.
  *
  *  Add other functionality as needed.
@@ -219,7 +225,8 @@ __interrupt void cpu_timer0_isr(void){
 	PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
 
-/** Current testbench behavior.
+/**
+ * @brief Current testbench behavior.
  *  Increments all values by 1 until reaching 1000, then decrements to 0.
  *  No real functionality. Could be updated to set it around the setpoint.
  */

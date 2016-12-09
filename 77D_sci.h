@@ -1,11 +1,12 @@
-/** Serial Communications function prototypes and macros.
- *  77D_sci.h
+/**
+ *  @brief Serial Communications function prototypes and macros.
+ *  @file 77D_sci.h
  *
  *  This file contains the prototypes used in the serial communications,
  *  as well as a configuration option that could be expanded upon.
  *
- *  Created on: Apr 27, 2016
- *      Author: Eric
+ *  @date Dec 8 2016
+ *  @author Eric Silk
  *
  *      Device Specific definitions for SCI communications.
  *
@@ -14,7 +15,8 @@
 //#ifndef 77D_SCI_H_
 //#define 77D_SCI_H_
 
-/** Select one of two baud rates
+/**
+ *  @brief Select one of two baud rates
  *
  *  HIGH_BAUD, if defined, will set the baud rate to 3.125M. Otherwise it
  *  will be set to 9600. If you need to regularly update this, consider

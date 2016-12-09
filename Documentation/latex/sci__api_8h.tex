@@ -1,0 +1,162 @@
+\hypertarget{sci__api_8h}{}\section{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/sci\+\_\+api.h File Reference}
+\label{sci__api_8h}\index{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/sci\+\_\+api.\+h@{E\+:/\+Users/\+Eric/\+Documents/\+Senior Design/sci\+\_\+testbench\+\_\+alt/sci\+\_\+api.\+h}}
+
+
+A\+PI Prototypes and Macros.  
+
+
+{\ttfamily \#include \char`\"{}F28x\+\_\+\+Project.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structparams}{params}
+\begin{DoxyCompactList}\small\item\em Parameter structure Contains all relevant parameters for Flywheel operation. Currently there should be two instances of this structure\+: operating point and set point. You should limit your code to only ever update the set point when commanded to by the G\+UI. The operating point should update whenever you have new information about flywheel operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries S\+A\+F\+E\+\_\+\+D\+E\+C\+EL}~10;
+\item 
+\#define {\bfseries S\+A\+F\+E\+\_\+\+J\+E\+RK}~1;
+\item 
+\#define {\bfseries I\+C\+M\+\_\+\+S\+T\+A\+RT}~0b00000001
+\item 
+\#define {\bfseries I\+C\+M\+\_\+\+S\+T\+OP}~0b00000010
+\item 
+\#define {\bfseries I\+C\+M\+\_\+\+E\+M\+E\+R\+G\+E\+N\+C\+Y\+\_\+\+S\+T\+OP}~0b00000011
+\item 
+\#define {\bfseries I\+C\+M\+\_\+\+S\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+TY}~0b00000100
+\item 
+\#define {\bfseries I\+C\+M\+\_\+\+S\+E\+T\+\_\+\+A\+C\+C\+E\+L\+E\+R\+A\+T\+I\+ON}~0b00000101
+\item 
+\#define {\bfseries I\+C\+M\+\_\+\+S\+E\+T\+\_\+\+J\+E\+RK}~0b00000110
+\item 
+\#define {\bfseries C\+C\+M\+\_\+\+S\+T\+A\+RT}~0b10000001
+\item 
+\#define {\bfseries C\+C\+M\+\_\+\+S\+T\+OP}~0b10000010
+\item 
+\#define {\bfseries C\+C\+M\+\_\+\+E\+M\+E\+R\+G\+E\+N\+C\+Y\+\_\+\+S\+T\+OP}~0b10000011
+\item 
+\#define {\bfseries C\+C\+M\+\_\+\+S\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+TY}~0b10000100
+\item 
+\#define {\bfseries C\+C\+M\+\_\+\+S\+E\+T\+\_\+\+A\+C\+C\+E\+L\+E\+R\+A\+T\+I\+ON}~0b10000101
+\item 
+\#define {\bfseries C\+C\+M\+\_\+\+S\+E\+T\+\_\+\+J\+E\+RK}~0b10000110
+\item 
+\#define {\bfseries I\+C\+C\+\_\+\+E\+R\+R\+OR}~0b00100001
+\item 
+\#define {\bfseries C\+C\+C\+\_\+\+E\+R\+R\+OR}~0b10100001
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+V\+E\+L\+O\+C\+I\+TY}~0b01000001
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+A\+C\+C\+E\+L\+E\+R\+A\+T\+I\+ON}~0b01000010
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+J\+E\+RK}~0b01000011
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+L\+O\+W\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+X}~0b01000100
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+L\+O\+W\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+Y}~0b01000101
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+U\+P\+P\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+X}~0b01000110
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+U\+P\+P\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+Y}~0b01000111
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+R\+O\+T\+A\+T\+I\+O\+N\+A\+L\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+X}~0b01001000
+\item 
+\#define {\bfseries I\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+R\+O\+T\+A\+T\+I\+O\+N\+A\+L\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+y}~0b01001001
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+V\+E\+L\+O\+C\+I\+TY}~0b11000001
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+A\+C\+C\+E\+L\+E\+R\+A\+T\+I\+ON}~0b11000010
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+J\+E\+RK}~0b11000011
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+L\+O\+W\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+X}~0b11000100
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+L\+O\+W\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+Y}~0b11000101
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+U\+P\+P\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+X}~0b11000110
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+U\+P\+P\+E\+R\+\_\+\+D\+I\+S\+P\+L\+A\+C\+E\+M\+E\+N\+T\+\_\+Y}~0b11000111
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+R\+O\+T\+A\+T\+I\+O\+N\+A\+L\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+X}~0b11001000
+\item 
+\#define {\bfseries C\+D\+M\+\_\+\+S\+E\+N\+D\+\_\+\+R\+O\+T\+A\+T\+I\+O\+N\+A\+L\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+y}~0b11001001
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{sci__api_8h_ac208f7e7c011ec887ca3ec03b241941f}{}\label{sci__api_8h_ac208f7e7c011ec887ca3ec03b241941f} 
+void \hyperlink{sci__api_8h_ac208f7e7c011ec887ca3ec03b241941f}{init\+\_\+params} (struct \hyperlink{structparams}{params} $\ast$values)
+\begin{DoxyCompactList}\small\item\em Accepts a pointer to a params struct and sets all values to 0. Change as needed to set to the desired default values. 0 seemed like a safe bet. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8h_a73760ed076a8b339bbe017196373d71d}{}\label{sci__api_8h_a73760ed076a8b339bbe017196373d71d} 
+void \hyperlink{sci__api_8h_a73760ed076a8b339bbe017196373d71d}{extract\+\_\+cmd} (char extracted\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Not currently in use. Was meant to extract the data from a packet, see \hyperlink{sci__api_8c_a17115cd37a42375bb9b191e4db34aa43}{assemble()} for current solution. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8h_aee286273399f4cc1ac3302ec6b4ee9a8}{}\label{sci__api_8h_aee286273399f4cc1ac3302ec6b4ee9a8} 
+int {\bfseries parse\+\_\+cmd} (char extracted\mbox{[}4\mbox{]}, struct \hyperlink{structparams}{params} $\ast$op\+\_\+point)
+\item 
+int \hyperlink{sci__api_8h_ae9832bac010cccef92f1ebb6755f6ffa}{e\+\_\+stop} (struct \hyperlink{structparams}{params} $\ast$set\+\_\+point)
+\begin{DoxyCompactList}\small\item\em Initiate an emergency stop. Upon receipt of an emergency stop, set the set point velocity to 0 and the acceleration and jerk to their maximum safe value. These safe values are defined in \hyperlink{sci__api_8h}{sci\+\_\+api.\+h} and must currently be configured at compile time. \end{DoxyCompactList}\item 
+int \hyperlink{sci__api_8h_a627f6bcfacca0e2fc1eef64883c69c3e}{send\+\_\+value} (char I\+DM, float val, char C\+DM)
+\begin{DoxyCompactList}\small\item\em Sends a packet to the G\+UI Accepts the I\+DM, value, and C\+DM. In the event the transmission protocol changes (e.\+g. U\+SB, Ethernet), this will need to be updated. \end{DoxyCompactList}\item 
+int \hyperlink{sci__api_8h_a3b8965bce76bcbcd9726e7ef30ea4636}{broadcast} (int enable, struct \hyperlink{structparams}{params} values)
+\begin{DoxyCompactList}\small\item\em Broadcasts current operating point information Currently accepts and enable value that isn\textquotesingle{}t in use and the operating point structure. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8h_a1aa642c19a64bcbfdd89d0903360640b}{}\label{sci__api_8h_a1aa642c19a64bcbfdd89d0903360640b} 
+int \hyperlink{sci__api_8h_a1aa642c19a64bcbfdd89d0903360640b}{broadcast\+\_\+ctrl} (int enable)
+\begin{DoxyCompactList}\small\item\em Not currently in use. Was to enable/disable broadcasting of data. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8h_aba7de291e35b3d2be08582b1f6f0a961}{}\label{sci__api_8h_aba7de291e35b3d2be08582b1f6f0a961} 
+int \hyperlink{sci__api_8h_aba7de291e35b3d2be08582b1f6f0a961}{send\+\_\+error} (Uint16 error)
+\begin{DoxyCompactList}\small\item\em Not currently in use If an error code is needed, send it here. Should probably just call \hyperlink{sci__api_8c_a627f6bcfacca0e2fc1eef64883c69c3e}{send\+\_\+value()} with the error code. \end{DoxyCompactList}\item 
+\hypertarget{sci__api_8h_a17115cd37a42375bb9b191e4db34aa43}{}\label{sci__api_8h_a17115cd37a42375bb9b191e4db34aa43} 
+float \hyperlink{sci__api_8h_a17115cd37a42375bb9b191e4db34aa43}{assemble} (char data\mbox{[}6\mbox{]})
+\begin{DoxyCompactList}\small\item\em Convert packet to a float Accepts the 6 element data packet and extracts the 4 data bytes Assembles those bytes into a float value through the use of a union. Probably could be improved stylistically through the use of bitfields. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A\+PI Prototypes and Macros. 
+
+These macros define the various codes used in the A\+PI, along with defining the expected control paramater structure.
+
+\begin{DoxyDate}{Date}
+8 Dec 2016 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Eric Silk 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\hypertarget{sci__api_8h_a3b8965bce76bcbcd9726e7ef30ea4636}{}\label{sci__api_8h_a3b8965bce76bcbcd9726e7ef30ea4636} 
+\index{sci\+\_\+api.\+h@{sci\+\_\+api.\+h}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!sci\+\_\+api.\+h@{sci\+\_\+api.\+h}}
+\subsubsection{\texorpdfstring{broadcast()}{broadcast()}}
+{\footnotesize\ttfamily int broadcast (\begin{DoxyParamCaption}\item[{int}]{enable,  }\item[{struct \hyperlink{structparams}{params}}]{values }\end{DoxyParamCaption})}
+
+
+
+Broadcasts current operating point information Currently accepts and enable value that isn\textquotesingle{}t in use and the operating point structure. 
+
+Currently very slow. It must wait until the lasat packet is fully transmitted before sending the next, and must transmit all packets before returning. Consider using the S\+C\+IA TX interrupt and developing an I\+SR for less time in the function and greater throughput. For instance, set the interrupt to fire anytime there are fewer than 8 elements in the F\+I\+FO and stuff the next packet in before returning. Use a software F\+SM to track the next packet that needs transmission (preferably using an enumerated type to restrict behavior).
+
+Google it if you don\textquotesingle{}t know what I\textquotesingle{}m talking about. \hypertarget{sci__api_8h_ae9832bac010cccef92f1ebb6755f6ffa}{}\label{sci__api_8h_ae9832bac010cccef92f1ebb6755f6ffa} 
+\index{sci\+\_\+api.\+h@{sci\+\_\+api.\+h}!e\+\_\+stop@{e\+\_\+stop}}
+\index{e\+\_\+stop@{e\+\_\+stop}!sci\+\_\+api.\+h@{sci\+\_\+api.\+h}}
+\subsubsection{\texorpdfstring{e\+\_\+stop()}{e\_stop()}}
+{\footnotesize\ttfamily int e\+\_\+stop (\begin{DoxyParamCaption}\item[{struct \hyperlink{structparams}{params} $\ast$}]{set\+\_\+point }\end{DoxyParamCaption})}
+
+
+
+Initiate an emergency stop. Upon receipt of an emergency stop, set the set point velocity to 0 and the acceleration and jerk to their maximum safe value. These safe values are defined in \hyperlink{sci__api_8h}{sci\+\_\+api.\+h} and must currently be configured at compile time. 
+
+The G\+UI expects an A\+CK, so it also sends the relevant code up.
+
+Possible improvements would be accepting S\+A\+F\+E\+\_\+\+D\+E\+C\+EL and S\+A\+F\+E\+\_\+\+J\+E\+RK arguments so that the operator can set those, but this could lead to undesirable behavior during operation. Additionally, some form of error checking if needed and an appropriate return value as needed. \hypertarget{sci__api_8h_a627f6bcfacca0e2fc1eef64883c69c3e}{}\label{sci__api_8h_a627f6bcfacca0e2fc1eef64883c69c3e} 
+\index{sci\+\_\+api.\+h@{sci\+\_\+api.\+h}!send\+\_\+value@{send\+\_\+value}}
+\index{send\+\_\+value@{send\+\_\+value}!sci\+\_\+api.\+h@{sci\+\_\+api.\+h}}
+\subsubsection{\texorpdfstring{send\+\_\+value()}{send\_value()}}
+{\footnotesize\ttfamily int send\+\_\+value (\begin{DoxyParamCaption}\item[{char}]{I\+DM,  }\item[{float}]{val,  }\item[{char}]{C\+DM }\end{DoxyParamCaption})}
+
+
+
+Sends a packet to the G\+UI Accepts the I\+DM, value, and C\+DM. In the event the transmission protocol changes (e.\+g. U\+SB, Ethernet), this will need to be updated. 
+
+Possible improvements would be checking the I\+D\+M/\+C\+DM pair or only accepting one and filling in the other, and enforcing some form of error checking with an appropriate return value. 

@@ -1,11 +1,12 @@
-/** Serial Communications functions.
- *  77D_sci.c
+/**
+ *  @brief Serial Communications functions.
+ *  @file 77D_sci.c
  *
  *  This file contains the functions that act as an interface between the
  *  API and the hardware, as well as the initialization of the hardware.
  *
- *  Created on: Apr 27, 2016
- *      Author: Eric
+ *  @date Dec 8 2016
+ *  @author Eric Silk
  *
  *      Device Specific definitions for SCI communications.
  *
@@ -14,7 +15,8 @@
 #include "F28x_Project.h"     // Device Headerfile and Examples Include File
 
 
-/** Initializes the SCI and FIFO's
+/**
+ * @brief Initializes the SCI and FIFO's
  *
  * Current version is the "verbose" initialization that should help alleviate the burden of reading
  * some technical documentation to get this to run.
@@ -113,7 +115,8 @@ void scia_fifo_init()
 
 
 
-/** Transmit a character from the SCI
+/**
+ *  @brief Transmit a character from the SCI
  *
  *  Currently waits for the TX FIFO to be empty to ensure no clobbering occurs.
  *  Remove the while() loop if calling from an interrupt and/or to improve
@@ -124,7 +127,8 @@ void scia_xmit_char(char a)
     while (SciaRegs.SCIFFTX.bit.TXFFST != 0);
     SciaRegs.SCITXBUF.bit.TXDT = a;
 }
-/** Split and transmit a float over 4 bytes
+/**
+ *  @brief Split and transmit a float over 4 bytes
  *  The FIFO's only accept 8 bit values. To send floats, they must be accessed
  *  8 bits at a time. A possible improvement would be to use bitfields.
  *
@@ -152,7 +156,8 @@ void scia_xmit_float(float a)
 	}
 }
 
-/** Transmit a string from the SCI
+/**
+ *  @brief Transmit a string from the SCI
  *
  *  Accepts the pointer to a C-string (fyi don't Google that without safe search).
  *  Transmits the entire string, expects a terminating NULL character. Currently
